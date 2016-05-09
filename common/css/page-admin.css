@@ -1,0 +1,92 @@
+.row-actions {
+  color: #DDD;
+  font-size: 13px;
+  left: -9999em;
+  position: relative;
+}
+.row-actions,
+.row-actions-visible {
+  padding: 2px 0 0;
+}
+tr:hover .row-actions {
+  position: static;
+}
+body {
+  overflow-x: hidden;
+}
+.posts-markdown {
+  resize: none;
+  border: none;
+  min-height: 500px;
+}
+.border-none {
+  border: none;
+}
+.markdown-view {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.markdown-view .view-header {
+  align-items: center;
+  border-bottom: 1px solid #DFE1E3;
+  display: flex;
+  flex-shrink: 0;
+  height: 65px;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+.markdown-view .view-header .view-title {
+  flex-grow: 1;
+  align-items: center;
+  display: flex;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.2em;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.markdown-view .view-header .view-title input {
+  background: transparent none repeat scroll 0 0;
+  border: 0 none;
+  color: #242628;
+  font-size: 2.6rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.markdown-view .view-header .view-actions {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+}
+.markdown-view .view-header .view-actions .post-settings {
+  color: #7D878A;
+  display: inline-block;
+  position: relative;
+  margin-right: 5px;
+  transition: all 0.15s ease-out 0s;
+}
+.markdown-view .view-container,
+.markdown-view .view-content {
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+.entry-title {
+  background: transparent none repeat scroll 0 0;
+  border: 0 none;
+  color: #242628;
+  font-size: 2.6rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

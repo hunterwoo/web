@@ -1,0 +1,140 @@
+<!-- Header -->
+<div id="header" ng-controller="headerCtrl as hdCtrl">
+    <div class="color-line">
+    </div>
+    <div id="logo" class="light-version">
+        <a href="/">
+            To WeBlog
+        </a>
+    </div>
+    <nav role="navigation">
+        <div class="header-link hide-menu" to-toggle-menu="">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="small-logo">
+            <span class="text-primary">HOMER APP</span>
+        </div>
+        <form role="search" class="navbar-form-custom" method="post" action="#">
+            <div class="form-group">
+                <input type="text" placeholder="Search something special" class="form-control" name="search">
+            </div>
+        </form>
+        <div class="mobile-menu" uib-dropdown="">
+            <button type="button" class="navbar-toggle mobile-menu-toggle" uib-dropdown-toggle="">
+                <i class="fa fa-chevron-down"></i>
+            </button>
+            <div class="collapse mobile-navbar" uib-dropdown-menu="">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="" ng-click="loginService.signout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav no-borders">
+                <li class="dropdown" uib-dropdown>
+                    <a class="dropdown-toggle" uib-dropdown-toggle="">
+                        <i class="fa fa-bell-o"></i>
+                    </a>
+                    <ul class="dropdown-menu hdropdown notification animated flipInX" uib-dropdown-menu>
+                        <li>
+                            <a>
+                                <span class="label label-success">NEW</span> 0 条
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span class="label label-warning">WAR</span> 0 条
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span class="label label-danger">ERR</span> 0 条
+                            </a>
+                        </li>
+                        <li class="summary"><a href="#">查看所有的通知</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" uib-dropdown="">
+                    <a class="dropdown-toggle" uib-dropdown-toggle="">
+                        <i class="fa fa-align-justify"></i>
+                    </a>
+
+                    <div class="dropdown-menu hdropdown bigmenu animated flipInX" uib-dropdown-menu="">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a ui-sref="articles.list">
+                                        <i class="fa fa-file-o fa-3x text-info"></i>
+                                        <h5>文章</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a ui-sref="email">
+                                        <i class="fa fa-envelope-o text-warning"></i>
+                                        <h5>Email</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a ui-sref="contact">
+                                        <i class="fa fa-phone text-success"></i>
+                                        <h5>联系</h5>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ui-sref="comment.list">
+                                        <i class="fa fa-comments-o text-info"></i>
+                                        <h5>评论</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a ui-sref="home">
+                                        <i class="fa fa-bar-chart text-danger"></i>
+                                        <h5>分析</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a ui-sref="files">
+                                        <i class="fa fa-files-o text-success"></i>
+                                        <h5>文件</h5>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <li class="dropdown" uib-dropdown>
+                    <a class="dropdown-toggle label-menu-corner" uib-dropdown-toggle>
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="label label-success" ng-bind="hdCtrl.messages.total"
+                              ng-show="hdCtrl.messages.total > 0"></span>
+                    </a>
+                    <ul class="dropdown-menu hdropdown animated flipInX" uib-dropdown-menu>
+                        <div class="title">
+                            You have {{hdCtrl.messages.total}} new messages
+                        </div>
+                        <li ng-repeat="message in hdCtrl.messages.data track by message._id">
+                            <a ng-bind="message.name"></a>
+                        </li>
+                        <li class="summary"><a ui-sref="message.list()">See All Messages</a></li>
+                    </ul>
+                </li>
+                <!--<li>-->
+                <!--<a href="#" id="sidebar" class="right-sidebar-toggle">-->
+                <!--<i class="fa fa-envelope-o"></i>-->
+                <!--</a>-->
+                <!--</li>-->
+                <li class="dropdown">
+                    <a ng-click="loginService.signout()">
+                        <i class="fa fa-sign-out"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

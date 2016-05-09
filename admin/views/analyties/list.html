@@ -1,0 +1,33 @@
+<div class="row animate-panel content">
+    <div class="row">
+        <div class="col-md-3 col-xs-12">
+            <div class="hpanel">
+                <div class="panel-body text-center h-200">
+                    <i class="fa fa-users fa-4x"></i>
+
+                    <h1 class="m-xs" ng-bind="alCtrl.clientCount || 0"></h1>
+
+                    <h3 class="font-extra-bold no-margins text-success">
+                        总访问数
+                    </h3>
+                    <small>Ze'ev Kell 的总访问数量</small>
+                </div>
+                <div class="panel-footer text-center">
+                    只统计IP
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-xs-12">
+            <div class="hpanel">
+                <div class="panel-body h-200">
+                    <div style="height:160px">
+                        <canvas id="visitorViewsChart" style="height:160px;width:100%;vertical-align: bottom;"></canvas>
+                    </div>
+                </div>
+                <div class="panel-footer text-center">
+                    只统计IP
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

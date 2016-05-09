@@ -1,0 +1,163 @@
+<div class="content animate-panel">
+    <div class="row">
+        <div class="col-lg-12 text-center m-t-md" style="">
+            <h2>
+                Welcome to Ze'ev Kell's Home
+            </h2>
+
+            <p>
+                <strong>目前开发阶段</strong>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12" style="">
+            <div class="hpanel">
+                <div class="panel-heading">
+                    <div class="panel-tools" panel-tools="">
+                        <a class="showhide" type="toggle"><i class="fa fa-chevron-up"></i></a>
+                        <a class="closebox" type="close"><i class="fa fa-times"></i></a>
+                    </div>
+                    访问数据统计
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-9 col-xs-12">
+
+                            <div class="h-200" style="height: 200px">
+                                <canvas id="visitorViewsChart"
+                                        style="height:200px;width:100%;vertical-align: bottom;"></canvas>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3 hidden-xs" style="padding: 15px;">
+                            <div class="small">
+                                <i class="fa fa-clock-o"></i> 本站成立时间
+                            </div>
+                            <div>
+                                <h1 class="font-extra-bold m-t-xl m-b-xs text-center">
+                                    {{hCtrl.establishTime}}
+                                </h1>
+                            </div>
+                            <div class="small m-t-xl text-right">
+                                <i class="fa fa-clock-o"></i> 上次更新时间是：2016/3/3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3" style="">
+            <div class="hpanel">
+                <div class="panel-body text-center h-200">
+                    <i class="fa fa-file-o fa-4x"></i>
+
+                    <h1 class="m-xs" ng-bind="hCtrl.articles || 0"></h1>
+
+                    <h3 class="font-extra-bold no-margins text-success">
+                        日志数
+                    </h3>
+                    <small>发表的各种主题的日志</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3" style="">
+            <div class="hpanel stats">
+                <div class="panel-body h-200">
+                    <div class="stats-title pull-left">
+                        <h4>USER</h4>
+                    </div>
+                    <div class="stats-icon pull-right">
+                        <i class="fa fa-share-alt fa-4x"></i>
+                    </div>
+                    <div class="m-t-xl">
+                        <h3 class="m-b-xs" ng-bind="hCtrl.user"></h3>
+                    <span class="font-bold no-margins">
+                        权限大于50
+                    </span>
+
+                        <div class="progress m-t-xs full progress-small">
+                            <div style="width: 33%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="33"
+                                 role="progressbar" class=" progress-bar progress-bar-success">
+                                <span class="sr-only">33% Complete (success)</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6" style="">
+                                <small class="stats-label">已注册 / 游客</small>
+                                <h4>0</h4>
+                            </div>
+
+                            <div class="col-xs-6" style="">
+                                <small class="stats-label">% 新注册</small>
+                                <h4>0</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3" style="">
+            <div class="hpanel stats">
+                <div class="panel-body h-200">
+                    <div class="stats-title pull-left">
+                        <h4>MESSAGE</h4>
+                    </div>
+                    <div class="stats-icon pull-right">
+                        <i class="fa fa-desktop fa-4x"></i>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="">
+                        <h1 class="text-success" ng-bind="hCtrl.message || 0">0</h1>
+                    </div>
+                    <div class="m-t-xs">
+
+                        <div class="row">
+                            <div class="col-xs-5" style="">
+                                <small class="stat-label">Today</small>
+                                <h4>0 </h4>
+                            </div>
+                            <div class="col-xs-7" style="">
+                                <small class="stat-label">Total</small>
+                                <h4>0</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3" style="">
+            <div class="hpanel stats">
+                <div class="panel-body h-200">
+                    <div class="stats-title pull-left">
+                        <h4>Comment</h4>
+                    </div>
+                    <div class="stats-icon pull-right">
+                        <i class="fa fa-comments-o fa-4x"></i>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="">
+                        <h1 class="text-success">0</h1>
+                    </div>
+                    <div class="m-t-xs">
+
+                        <div class="row">
+                            <div class="col-xs-5" style="">
+                                <small class="stat-label">Today</small>
+                                <h4>0 </h4>
+                            </div>
+                            <div class="col-xs-7" style="">
+                                <small class="stat-label">Last week</small>
+                                <h4>0<!--<i class="fa fa-minus text-success"></i>--></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

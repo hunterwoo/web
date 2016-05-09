@@ -1,0 +1,146 @@
+@import "common";
+
+* {
+  margin     : 0;
+  padding    : 0;
+  box-sizing : border-box;
+}
+
+*::before, *::after {
+  box-sizing : border-box;
+}
+
+.main {
+  display      : table;
+  table-layout : fixed;
+  width        : 100%;
+  box-sizing   : border-box;
+  position     : relative;
+  height       : 100%;
+  .main_cell {
+    display        : table-cell;
+    height         : 100%;
+    vertical-align : middle;
+    width          : 100%;
+    .head-line {
+      position : relative;
+      z-index  : 10;
+    }
+  }
+}
+
+img {
+  vertical-align : middle;
+  border         : 0 none;
+}
+
+html, body {
+  font-family : "Microsoft YaHei", "微软雅黑", Helvetica, Arial, sans-serif;
+  font-size   : 16px;
+  height      : 100%;
+  width       : 100%;
+  overflow    : hidden;
+}
+
+.clearfix::before, .clearfix::after,
+.container-fluid::after,
+.row::before, .row::after {
+  content : " ";
+  display : table;
+}
+
+.clearfix:after,
+.row:after {
+  clear : both;
+}
+
+.text-center {
+  text-align : center;
+}
+
+.text-left {
+  text-align : left;
+}
+
+.text-right {
+  text-align : right;
+}
+
+.pull-left {
+  float : left;
+}
+
+.img-circle {
+  border-radius : 50%;
+}
+
+#section_1_canvas {
+  //height   : 100%;
+  left     : 0;
+  position : absolute;
+  top      : 0;
+  //width    : 100%;
+  z-index  : auto;
+}
+
+.big-head-line {
+  font-weight : 100;
+  font-size   : 10em;
+  color       : #222222;
+  margin      : 0;
+}
+
+.sub-head-line {
+  color       : #222222;
+  font-size   : 3em;
+  font-weight : 200;
+  margin      : 0;
+}
+
+//.sub-head-line .wrap > span:last-child{
+//  .animation(bounce_in .5s linear 0s 1 normal);
+//  .animation-fill-mode();
+//}
+
+@media all and (max-width : 1200px) {
+  .big-head-line {
+    font-size : 8em;
+  }
+
+  .sub-head-line {
+    font-size : 3em;
+  }
+
+  html, body {
+    font-size : 14px;
+  }
+}
+
+@media all and (max-width : 768px) {
+  .big-head-line {
+    font-size : 5em;
+  }
+
+  .sub-head-line {
+    font-size : 1.5em;
+  }
+
+  html, body {
+    font-size : 12px;
+  }
+}
+
+@media all and (max-width : 380px) {
+  .big-head-line {
+    font-size : 5em;
+  }
+
+  .sub-head-line {
+    font-size   : 1.2em;
+    font-weight : 200;
+  }
+
+  html, body {
+    font-size : 10px;
+  }
+}

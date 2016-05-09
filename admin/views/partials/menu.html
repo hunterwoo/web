@@ -1,0 +1,56 @@
+<!-- Navigation -->
+<aside id="menu" ng-controller="menuCtrl as mCtrl">
+    <div id="navigation">
+        <div class="profile-picture">
+            <a href="index.html">
+                <img width="76" height="76" src="img/logo.jpg" class="img-circle m-b" alt="logo">
+            </a>
+
+            <div class="stats-label text-color">
+                <span class="font-extra-bold font-uppercase" ng-bind="loginService.getName()"></span>
+
+                <div class="dropdown" uib-dropdown="">
+                    <a class="dropdown-toggle" uib-dropdown-toggle="">
+                        <small class="text-muted">身份角色：<span ng-bind="loginService.getRole()"></span><b
+                                class="caret"></b></small>
+                    </a>
+                    <ul class="dropdown-menu animated flipInX m-t-xs" uib-dropdown-menu="">
+                        <li><a ui-sref="setting">设置</a></li>
+                        <li><a ui-sref="home">数据分析</a></li>
+                        <li class="divider"></li>
+                        <li><a ng-click="loginService.signout()">退出</a></li>
+                    </ul>
+                </div>
+                <div id="sparkline1" class="small-chart m-t-sm">
+                    <canvas id="menuChartLine" style="display: inline-block; vertical-align: middle;"></canvas>
+                </div>
+                <div>
+                    <h4 class="font-extra-bold m-b-xs">
+                        <span ng-bind="mCtrl.clientCount"></span>
+                    </h4>
+                    <small class="text-muted">总访客数</small>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav" id="side-menu" uib-accordion close-others="true" template-url="template/nav/accordion.html">
+            <li uib-accordion-group ng-init="open[1]=false" is-open="open[1]"
+                template-url="template/nav/accordionGroup.html">
+                <a uib-accordion-heading style="display: none">
+                    <span class="nav-label">日志</span>
+                    <!--<span class="label label-success pull-right">11</span>-->
+                </a>
+                <ul class="nav nav-second-level" aria-expanded="false">
+                    <li ui-sref-active="active"><a ui-sref="posts.list">Content</a></li>
+                    <li ui-sref-active="active"><a ui-sref="posts.new">New Post</a></li>
+                    <li ui-sref-active="active"><a>Tags</a></li>
+                </ul>
+            </li>
+            <li ng-init="open[4] = false">
+                <a ui-sref="message.list()">
+                    <span class="nav-label">消息</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>

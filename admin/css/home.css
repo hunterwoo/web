@@ -1,0 +1,19 @@
+
+.row-actions {
+    color: #ddd;
+    font-size: 13px;
+    left: -9999em;
+    position: relative;
+}
+
+.row-actions, .row-actions-visible {
+    padding: 2px 0 0;
+}
+
+tr:hover .row-actions {
+    position: static;
+}
+
+body {
+    overflow-x: hidden;
+}

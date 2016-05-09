@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>zeev</title>
+    <meta name="description" content="">
+    <!--IE使用可用的最高版本的模式-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- build:css  /common/css/base.css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" type="text/css">
+    <!-- endbuild -->
+
+    <!-- build:css  /common/css/page-ember.css -->
+    <link rel="stylesheet" href="/common/css/page-ember.css" type="text/css">
+    <link rel="stylesheet" href="/common/css/animation.css" type="text/css">
+    <!-- endbuild -->
+
+    <!-- build:js  /ember/public/js/vendor.js -->
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/bower_components/ember/ember.debug.js"></script>
+    <script type="text/javascript" src="/bower_components/ember-data/ember-data.js"></script>
+    <script type="text/javascript" src="/bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="/bower_components/moment/locale/zh-cn.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js  /ember/js/zeev-ember.js -->
+    <script type="text/javascript" src="/ember/js/application.js"></script>
+    <script type="text/javascript" src="/ember/js/adapters.js"></script>
+    <script type="text/javascript" src="/ember/js/config.js"></script>
+    <script type="text/javascript" src="/ember/js/router.js"></script>
+    <script type="text/javascript" src="/ember/js/model.js"></script>
+    <script type="text/javascript" src="/ember/js/controller.js"></script>
+    <script type="text/javascript" src="/ember/js/view.js"></script>
+    <script type="text/javascript" src="/ember/js/component.js"></script>
+    <script type="text/javascript" src="/ember/js/helpers.js"></script>
+    <!-- endbuild -->
+
+    <script type="text/javascript" src="/common/libs/base.js"></script>
+
+</head>
+<body>
+
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- build:template.js  /ember/js/template.js -->
+<script type="text/x-handlebars" data-template-name="application">
+    {{loading-bar isLoading=isAjaxLoading}}
+    <aside class="left_col text-center">
+        <div class="profile">
+            <a href="/">
+                <img alt="HOME" class="img-circle profile_picture" src="/common/img/logo.jpg">
+            </a>
+        </div>
+        <div class="stats-label">
+            <h1>
+                {{model.name}}
+            </h1>
+            <ul class="nav nav-tabs nav-justified nav_color">
+                <li>
+                    <h3>28</h3>
+                    <h6>None</h6>
+                </li>
+                <li>
+                    <h3>28</h3>
+                    <h6>None</h6>
+                </li>
+                <li>
+                    <h3>28</h3>
+                    <h6>None</h6>
+                </li>
+            </ul>
+        </div>
+        <nav class="nav_menu">
+            <ul class="list-unstyled">
+                {{#link-to "index" tagName="li" title="主页"}}
+                <a><i class="fa fa-home" title="主页"></i><span>主页</span></a>
+                {{/link-to}}
+                {{#link-to "posts" tagName="li" title="记录"}}
+                <a><i class="fa fa-home" title="记录"></i><span>记录</span></a>
+                {{/link-to}}
+                {{#link-to "about" tagName="li" title="关于"}}
+                <a><i class="fa fa-home" title="关于"></i><span>关于</span></a>
+                {{/link-to}}
+            </ul>
+        </nav>
+        <div class="connect_btn">
+            <a class="btn btn-link" href="https://github.com/zeev-kell" target="_blank" title="github">
+                <i class="fa fa-github"></i>
+            </a>
+            <a class="btn btn-link" href="http://github.com" title="mail">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </div>
+    </aside>
+    <div class="right_col container-fluid">
+        <header class="nav_header">
+            <div class="nav_btn" {{action 'open_side' on="click"}}><i></i>
+    </div>
+    <h1>{{#link-to "index" title="主页" class="btn-lick"}}ZEEV的小站{{/link-to}}</h1>
+    {{#link-to "about" title="关于" class="profile_sm"}}<img alt="zeev" src="/common/img/logo.jpg">{{/link-to}}
+    </header>
+    <div id="side_mask" {{action
+    'close_side' on="click"}}></div>
+    {{outlet}}
+    </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="index">
+    <div class="axis">
+        <div class="axis_line"></div>
+        <ul class="axis_time">
+            <li>
+                <div class="time">2014</div>
+                <div class="content">- - - - - - - - - - - - <span class="text">something</span></div>
+            </li>
+            <li>
+                <div class="time">2015</div>
+                <div class="content">- - - - - - - - - - - - <span class="text">something</span></div>
+            </li>
+            <li>
+                <div class="time">2016</div>
+                <div class="content">- - - - - - - - - - - - <span class="text">something</span></div>
+            </li>
+        </ul>
+    </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="components/window-resize">
+    {{yield}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="components/loading-bar">
+    <div class="pace-progress" style="width: 100%;" data-progress-text="100%" data-progress="99">
+        <div class="pace-progress-inner"></div>
+    </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="components/loading-slider"></script>
+
+<script type="text/x-handlebars" data-template-name="components/header-nav-btn"></script>
+
+<script type="text/x-handlebars" data-template-name="posts">
+    <div class="content">
+        {{outlet}}
+    </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="posts/index">
+    <div class="container-fluid">
+        {{#each art in controller}}
+        <article class="row" style="border-bottom:1px solid #ddd">
+            <header class="col-md-8 col-xs-12">
+                <h2 class="title">{{#link-to "posts.info" art._id}}{{art.title}}{{/link-to}}</h2>
+                {{posts-dynamic posts=art}}
+                <div class="posts_abstract">{{{art.abstract}}}</div>
+            </header>
+            <div class="col-md-4 col-xs-12 content">
+                <img class="img-responsive" {{bind-attr src=art.image }}>
+            </div>
+        </article>
+        {{/each}}
+    </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="posts/info">
+    <div class="posts_wrap container-fluid">
+        <article class="posts_info">
+            <header>
+                <h2 class="title">{{model.title}}</h2>
+                {{posts-dynamic posts=model}}
+            </header>
+            {{#if model.coverImg}}
+            <div class="posts_cover">
+                <img class="img-responsive" {{bind-attr src=model.coverImg}}>
+            </div>
+            {{/if}}
+            <div class="posts_content">{{{model.html}}}</div>
+        </article>
+        <div class="posts_nav clearfix">
+            阅读下一篇
+        </div>
+    </div>
+    <footer class="posts_footer">
+        © 2016 - ze'ev 的小站
+    </footer>
+</script>
+
+<script type="text/x-handlebars" id="components/posts-dynamic">
+    <li>zeev 发布于 {{date posts.created_at}}</li>
+    <li>栏目：<a>未分类</a></li>
+    <li class="hidden-xs">共 <strong>0</strong> 人围观</li>
+    <li class="hidden-xs"><strong>0</strong> 个不明物体</li>
+</script>
+
+<script type="text/x-handlebars" data-template-name="about">
+
+    <div class="content" style="margin-left:0;margin-right:0;">
+
+        <header class="about_header">
+            <h1>Ze'ev Kell</h1>
+
+            <p><i class="fa fa-child"></i> The Front End Developer</p>
+        </header>
+
+        <div class="diamond_wrap">
+            <!--<div class="bg_matrix right"></div>-->
+            <div class="diamond_10 top">
+                <div class="diamond_times" style="background-image:url('/common/img/03.jpg')">
+                    <div class="diamond_text"></div>
+                </div>
+            </div>
+            <div class="diamond_10 bottom">
+                <div class="diamond_times">
+                    <div class="diamond_text"></div>
+                </div>
+            </div>
+            <div class="diamond_10 bottom left">
+                <div class="diamond_times" style="background-image:url('/common/img/01.jpg')">
+                    <div class="diamond_text"></div>
+                </div>
+            </div>
+            <div class="diamond_10 bottom right">
+                <div class="diamond_times">
+                    <div class="diamond_text"></div>
+                </div>
+            </div>
+            <div class="diamond_5 left">
+                <div class="diamond_times">
+                    <div class="diamond_text"></div>
+                </div>
+            </div>
+            <div class="diamond_5 center">
+                <div class="diamond_times">
+                    <div class="diamond_text"></div>
+                </div>
+            </div>
+            <div class="diamond_5 right">
+                <div class="diamond_times">
+                    <div class="diamond_text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- endbuild -->
+
+</body>
+
+
+</html>
