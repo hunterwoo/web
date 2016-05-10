@@ -66,7 +66,7 @@ function get(req, res) {
 }
 
 function remove(req, res) {
-    var _id = req.params._id || req.query._id;
+    var _id = req.query._id || req.body._id;
     debug(_id);
     Post.findByIdAndRemove(_id, function (err, doc) {
         if (err) {

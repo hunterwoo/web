@@ -101,11 +101,14 @@
     </aside>
     <div class="right_col container-fluid">
         <header class="nav_header">
-            <div class="nav_btn" {{action 'open_side' on="click"}}><i></i></div>
-            <h1>{{#link-to "index" title="主页" class="btn-lick"}}ZEEV的小站{{/link-to}}</h1>
-            {{#link-to "about" title="关于" class="profile_sm"}}<img alt="zeev" src="/common/img/logo.jpg">{{/link-to}}
-        </header>
-    <div id="side_mask" {{action "close_side" on="click"}}></div>
+            <div class="nav_btn" {{action
+            'open_side' on="click"}}><i></i>
+    </div>
+    <h1>{{#link-to "index" title="主页" class="btn-lick"}}ZEEV的小站{{/link-to}}</h1>
+    {{#link-to "about" title="关于" class="profile_sm"}}<img alt="zeev" src="/common/img/logo.jpg">{{/link-to}}
+    </header>
+    <div id="side_mask" {{action
+    "close_side" on="click"}}></div>
     {{outlet}}
     </div>
 </script>
@@ -210,40 +213,44 @@
         <div class="diamond_wrap">
             <!--<div class="bg_matrix right"></div>-->
             <div class="diamond_10 top">
-                <div class="diamond_times" style="background-image:url('/common/img/03.jpg')">
+                <div class="diamond_times" style="background-image:url('/common/img/bg.jpg')">
+                    <div class="diamond_text"></div>
+                </div>
+            </div>
+            <div class="diamond_10 top right">
+                <div class="diamond_times">
                     <div class="diamond_text"></div>
                 </div>
             </div>
             <div class="diamond_10 bottom">
-                <div class="diamond_times">
+                <div class="diamond_times" style="background-image:url('/common/img/04.jpg')">
                     <div class="diamond_text"></div>
                 </div>
             </div>
             <div class="diamond_10 bottom left">
-                <div class="diamond_times" style="background-image:url('/common/img/01.jpg')">
-                    <div class="diamond_text"></div>
-                </div>
-            </div>
-            <div class="diamond_10 bottom right">
                 <div class="diamond_times">
                     <div class="diamond_text"></div>
                 </div>
             </div>
-            <div class="diamond_5 left">
-                <div class="diamond_times">
-                    <div class="diamond_text"></div>
-                </div>
-            </div>
+            <!--<div class="diamond_5 left">-->
+            <!--<div class="diamond_times">-->
+            <!--<div class="diamond_text"></div>-->
+            <!--</div>-->
+            <!--</div>-->
             <div class="diamond_5 center">
                 <div class="diamond_times">
                     <div class="diamond_text"></div>
                 </div>
             </div>
-            <div class="diamond_5 right">
-                <div class="diamond_times">
-                    <div class="diamond_text"></div>
-                </div>
-            </div>
+            <!--<div class="diamond_5 right">-->
+            <!--<div class="diamond_times">-->
+            <!--<div class="diamond_text"></div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+
+        <div class="text-center" style="margin-top:100px;">
+            something will insert here...
         </div>
     </div>
 </script>

@@ -520,6 +520,13 @@ header.about_header h1 {
   position: absolute;
   background-color: #999999;
 }
+.diamond_5:hover,
+.diamond_10:hover,
+.diamond_20:hover {
+  -webkit-box-shadow: 2px 0px 2px #000;
+  -moz-box-shadow: 2px 0px 2px #000;
+  box-shadow: 2px 0px 2px #000;
+}
 .diamond_5 .diamond_times,
 .diamond_10 .diamond_times,
 .diamond_20 .diamond_times {

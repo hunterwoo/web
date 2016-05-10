@@ -1880,7 +1880,7 @@ body {
 @media (max-width: 768px) {
     .content {
         padding: 15px 15px 15px 15px;
-        min-width: 320px;
+        min-width: 280px;
     }
 }
 
@@ -3292,7 +3292,7 @@ h6 {
 }
 
 .normalheader {
-    min-width: 320px;
+    min-width: 280px;
     padding: 40px 40px 0px 40px;
 }
 

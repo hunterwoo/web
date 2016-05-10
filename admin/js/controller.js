@@ -289,7 +289,10 @@
             }, function () {
                 $http({
                     method: "DELETE",
-                    url   : "/posts/" + _id
+                    params: {
+                        _id: _id
+                    },
+                    url   : "/posts"
                 }).success(function (data) {
                     SweetAlert.swal("Good job!", "删除成功!", "success");
                     $http({
@@ -314,7 +317,7 @@
         $scope.open = function () {
             $uibModal.open({
                 animation  : true,
-                templateUrl: 'views/template/markdownContent.html',
+                templateUrl: 'views/template/markdown-content.html',
                 size       : "md"
             });
         };
@@ -329,12 +332,19 @@
         }
     }
 
-    postsNewCtrl.$inject = ["$scope", "$http", "SweetAlert"]
-    function postsNewCtrl($scope, $http, SweetAlert) {
+    postsNewCtrl.$inject = ["$scope", "$http", "SweetAlert", "$uibModal"]
+    function postsNewCtrl($scope, $http, SweetAlert, $uibModal) {
         $scope.posts = {
             image   : 'http://img02.tooopen.com/images/20140314/sy_56692371155.jpg',
             markdown: ""
         }
+        $scope.open = function () {
+            $uibModal.open({
+                animation  : true,
+                templateUrl: 'views/template/markdown-content.html',
+                size       : "md"
+            });
+        };
         $scope.ok = function () {
             $http({
                 method: "POST",

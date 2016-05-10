@@ -28,8 +28,12 @@ var admin = angular.module("admin", [
         $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState) {
             $state.toParams = toParams;
             $state.toState = toState;
+            if ($("body").hasClass('show-sidebar')) {
+                $("body").removeClass('show-sidebar').addClass('hide-sidebar')
+            }
         })
         $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState) {
+            $("html, body").animate({ scrollTop: 0 }, 200);
         });
         $templateCache.put("template/nav/accordionGroup.html",
             "<li ng-class='{active:isOpen}' ui-sref-active='current-page'>\n" +

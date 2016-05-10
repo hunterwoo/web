@@ -1,7 +1,7 @@
 /**
  * Created by keziyuan on 2016/1/28.
  */
-!(function (angular,$) {
+!(function (angular, $) {
     angular.module('admin')
         .directive('iframeOnload', iframeOnload)
         //.directive('clearInput', clearInput)
