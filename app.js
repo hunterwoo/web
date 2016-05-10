@@ -10,8 +10,8 @@ var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 var dbConfig = require('./config/db.js');
 var fs = require('fs');
-var accessLog = fs.createWriteStream('./log/access.log', {flags: 'a'});
-var errorLog = fs.createWriteStream('./log/error.log', {flags: 'a'});
+var accessLog = fs.createWriteStream('./../logs/access.log', {flags: 'a'});
+var errorLog = fs.createWriteStream('./../logs/error.log', {flags: 'a'});
 /**
  * Connect to mongoose.
  */

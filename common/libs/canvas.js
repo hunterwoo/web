@@ -79,7 +79,6 @@ function WinResize(resize) {
     Particle.prototype.resize = function () {
         winWidth = $(window).width();
         winHeight = $(window).height();
-        console.log(winWidth,winHeight,pr);
         this.option.resizeOption.call(this);
         this.canvas.width = winWidth * pr;
         this.canvas.height = winHeight * pr;

@@ -93,6 +93,7 @@ var copyConfig = {
  */
 gulp.task('copy', function () {
     gulp.src(copyConfig.fonts).pipe(gulp.dest('./dist/common/fonts/'));
+    gulp.src([]).pipe(gulp.dest('./dist/logs/'));
     return es.merge(
         gulp.src(copyConfig.node_js).pipe(uglify()).pipe(header(banner, {pkg: pkg})),
         gulp.src(copyConfig.css).pipe(cleanCss()),
@@ -147,7 +148,7 @@ gulp.task('start', ['browser-sync'], function () {
         verbose: true,
         ignore : ["common/*", "gulpfile.js", "ember/js/**/*", "admin/js/**/*", "admin/views/**/*", "package.json"],
         env    : {
-            'NODE_ENV': 'development1',
+            'NODE_ENV': 'development',
             'DEBUG'   : 'Website:*',
             "PORT"    : 4222
         }
