@@ -1,3 +1,8 @@
+div::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: red;
+  border: 10px solid #fff;
+}
 html,
 body {
   font-size: 16px;
@@ -5,6 +10,7 @@ body {
 }
 body {
   overflow-x: hidden;
+  width: 100%;
   transition: all 0.2s ease-in 0s;
   -moz-transition: all 0.2s ease-in 0s;
   -o-transition: all 0.2s ease-in 0s;
@@ -29,12 +35,14 @@ a:focus {
   height: 100%;
   opacity: 1;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   transition: all 0.2s ease-in 0s;
   -moz-transition: all 0.2s ease-in 0s;
   -o-transition: all 0.2s ease-in 0s;
   -webkit-transition: all 0.2s ease-in 0s;
   position: fixed;
+  z-index: 1;
+  border: none;
   transform: translate(0, 0);
   -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
@@ -64,12 +72,6 @@ a:focus {
 .nav_menu li > a > i {
   padding-right: 5px;
 }
-.left_col .overlay {
-  height: 180px;
-  opacity: 0.7;
-  position: absolute;
-  width: 100%;
-}
 .profile {
   margin: 80px auto 0;
   position: relative;
@@ -97,6 +99,7 @@ a:focus {
   min-height: 100%;
   padding: 0;
   position: relative;
+  z-index: 100;
   overflow-x: hidden;
   transition: all 0.2s ease-in 0s;
   -moz-transition: all 0.2s ease-in 0s;

@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <!--IE使用可用的最高版本的模式-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <!-- build:css  /common/css/base.css -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" type="text/css">
@@ -100,13 +101,11 @@
     </aside>
     <div class="right_col container-fluid">
         <header class="nav_header">
-            <div class="nav_btn" {{action 'open_side' on="click"}}><i></i>
-    </div>
-    <h1>{{#link-to "index" title="主页" class="btn-lick"}}ZEEV的小站{{/link-to}}</h1>
-    {{#link-to "about" title="关于" class="profile_sm"}}<img alt="zeev" src="/common/img/logo.jpg">{{/link-to}}
-    </header>
-    <div id="side_mask" {{action
-    'close_side' on="click"}}></div>
+            <div class="nav_btn" {{action 'open_side' on="click"}}><i></i></div>
+            <h1>{{#link-to "index" title="主页" class="btn-lick"}}ZEEV的小站{{/link-to}}</h1>
+            {{#link-to "about" title="关于" class="profile_sm"}}<img alt="zeev" src="/common/img/logo.jpg">{{/link-to}}
+        </header>
+    <div id="side_mask" {{action "close_side" on="click"}}></div>
     {{outlet}}
     </div>
 </script>

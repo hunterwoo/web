@@ -15,13 +15,13 @@ function WinResize(resize) {
 
 !(function (window) {
 
-    var m = Math,
-        u = m.PI * 2,
-        MathCos = m.cos,
+    var m             = Math,
+        u             = m.PI * 2,
+        MathCos       = m.cos,
         winWidth,
         winHeight,
-        pr = window.devicePixelRatio || 1,
-        random = m.random,
+        pr            = 1, //window.devicePixelRatio || 1,
+        random        = m.random,
         isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|BB10|Windows Phone|Tizen|Bada)/);
 
 
@@ -30,10 +30,10 @@ function WinResize(resize) {
         this.resizeId = function () {
         };
         this.option = {
-            globalAlpha: 0.5,//透明
-            popple: 1.5,//增幅
-            flap: 100,//透明
-            resizeOption: function () {
+            globalAlpha    : 0.5,//透明
+            popple         : 1.5,//增幅
+            flap           : 100,//透明
+            resizeOption   : function () {
                 if (winWidth > 1200) {
                     this.option.popple = 1;
                     this.option.flap = 180;
@@ -48,13 +48,13 @@ function WinResize(resize) {
                     this.option.flap = 100;
                 }
             },
-            getSideLength: function () {//多边形的边数
+            getSideLength  : function () {//多边形的边数
                 return 3
             },
             getInitialAngle: function () {// 初始角度
                 return random() * u;
             },
-            getRadius: function () {//半径
+            getRadius      : function () {//半径
                 return Math.random() * Math.random() * 50
             }
         };
@@ -79,6 +79,7 @@ function WinResize(resize) {
     Particle.prototype.resize = function () {
         winWidth = $(window).width();
         winHeight = $(window).height();
+        console.log(winWidth,winHeight,pr);
         this.option.resizeOption.call(this);
         this.canvas.width = winWidth * pr;
         this.canvas.height = winHeight * pr;
@@ -219,30 +220,37 @@ function WinResize(resize) {
     ParticlePolygon.prototype = new Particle();
 
     var getParticles = {
-        "line": ParticleLine,
-        "circle": ParticleCircle,
+        "line"       : ParticleLine,
+        "circle"     : ParticleCircle,
         "line_circle": ParticleLineAndCircle,
-        "polygon": ParticlePolygon
+        "polygon"    : ParticlePolygon
     };
 
     function resizeHandler() {
         var _this = this;
-        if (isTouchDevice) {
 
-            if ($(document.activeElement).attr('type') !== 'text') {
-                var currentHeight = $(window).height();
+        clearTimeout(_this.resizeId);
+        _this.resizeId = setTimeout(function () {
+            _this.resize();
+        }, 500);
 
-                if (Math.abs(currentHeight - winHeight) > (20 * Math.max(winHeight, currentHeight) / 100)) {
-                    _this.resize();
-                    winHeight = currentHeight;
-                }
-            }
-        } else {
-            clearTimeout(_this.resizeId);
-            _this.resizeId = setTimeout(function () {
-                _this.resize();
-            }, 500);
-        }
+        //if (isTouchDevice) {
+        //
+        //    if ($(document.activeElement).attr('type') !== 'text') {
+        //        var currentHeight = $(window).height();
+        //
+        //        if (Math.abs(currentHeight - winHeight) > (20 * Math.max(winHeight, currentHeight) / 100)) {
+        //            _this.resize();
+        //            winHeight = currentHeight;
+        //        }
+        //    }
+        //} else {
+        //    clearTimeout(_this.resizeId);
+        //    _this.resizeId = setTimeout(function () {
+        //        _this.resize();
+        //    }, 500);
+        //}
+
     }
 
     function createParticle(option) {
@@ -271,13 +279,13 @@ function WinResize(resize) {
 
 !(function (window) {
 
-    var m = Math,
-        u = m.PI * 2,
+    var m       = Math,
+        u       = m.PI * 2,
         MathCos = m.cos,
         winWidth,
         winHeight,
-        pr = window.devicePixelRatio || 1,
-        random = m.random;
+        pr      = window.devicePixelRatio || 1,
+        random  = m.random;
 
     function particlePolygon(_id) {
 

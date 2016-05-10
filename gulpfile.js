@@ -1,8 +1,5 @@
 /**
  * Created by keziyuan on 2016/1/5.
- *
- *
- *
  */
 var gulp        = require('gulp'),
     es          = require('event-stream'),
@@ -150,7 +147,7 @@ gulp.task('start', ['browser-sync'], function () {
         verbose: true,
         ignore : ["common/*", "gulpfile.js", "ember/js/**/*", "admin/js/**/*", "admin/views/**/*", "package.json"],
         env    : {
-            'NODE_ENV': 'development',
+            'NODE_ENV': 'development1',
             'DEBUG'   : 'Website:*',
             "PORT"    : 4222
         }
