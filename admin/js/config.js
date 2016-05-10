@@ -48,9 +48,6 @@
                 modules: [{
                     name : 'akoenig.deckgrid',
                     files: [bower + "angular-deckgrid/angular-deckgrid.js", libsPath + 'css/deckgrid.css']
-                }, {
-                    name : 'angular-markdown',
-                    files: [bower + "showdown/src/showdown.js", bower + "showdown/src/ng-showdown.js"]
                 }]
             });
         }])
@@ -68,7 +65,6 @@
                 })
                 .state('posts.list', lazyLoadState({
                     url  : '/list',
-                    src  : ["akoenig.deckgrid"],
                     views: {
                         '': {
                             controller : 'postsListCtrl',

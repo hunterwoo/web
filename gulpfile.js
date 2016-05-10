@@ -5,9 +5,16 @@
  *
  */
 var gulp        = require('gulp'),
+    es          = require('event-stream'),
     clean       = require('gulp-clean'),
     less        = require('gulp-less'),
     nodemon     = require('gulp-nodemon'),
+    uglify      = require('gulp-uglify'),
+    gulpif      = require('gulp-if'),
+    useref      = require("gulp-useref"),
+    pkg         = require('./package.json'),
+    header      = require('gulp-header'),
+    cleanCss    = require("gulp-clean-css"),
     browserSync = require('browser-sync').create(),
     reload      = browserSync.reload;
 
@@ -55,6 +62,73 @@ gulp.task('less-watch', ['less'], function () {
     reload();
 });
 
+
+var copyConfig = {
+    html   : [
+        "./views*/404*",
+        './views*/error*',
+        './admin*/views*/**/*'
+    ],
+    image : [
+        './common*/img*/**/*'
+    ],
+    node_js: [
+        './bin*/*',
+        './config*/*.js',
+        './controller*/*.js',
+        './routes*/*.js',
+        './schema*/*.js',
+        './app*.js',
+        './admin*/*.js',
+        './ember*/*.js'
+    ],
+    js     : [
+        './libs*/**/*.js'
+    ],
+    fonts  : [
+        './bower_components/bootstrap/fonts/*.*',
+        './bower_components/font-awesome/fonts/*.*'
+    ],
+    css    : []
+}
+/**
+ *  复制并压缩
+ */
+gulp.task('copy', function () {
+    gulp.src(copyConfig.fonts).pipe(gulp.dest('./dist/common/fonts/'));
+    return es.merge(
+        gulp.src(copyConfig.node_js).pipe(uglify()).pipe(header(banner, {pkg: pkg})),
+        gulp.src(copyConfig.css).pipe(cleanCss()),
+        gulp.src(copyConfig.html),
+        gulp.src(copyConfig.image)
+    ).pipe(gulp.dest('./dist/')).on('error', log)
+})
+
+
+/**
+ *  build
+ */
+gulp.task('build', ['clean'], function () {
+    gulp.start('init', 'copy');
+});
+
+/**
+ * 处理主文件打包
+ */
+gulp.task("init", ['less'], function () {
+    return gulp.src([
+        './view*/index.html',
+        './admin*/index.html',
+        './ember*/index.html'
+    ]).pipe(useref({
+        searchPath: './'
+    }))
+        .pipe(gulpif("*.js", gulpif(production, uglify())))
+        .pipe(gulpif("*.js", header(banner, {pkg: pkg})))
+        .pipe(gulpif("*.css", gulpif(production, cleanCss())))
+        .pipe(gulp.dest('./dist/'))
+})
+
 /**
  *  启动自动刷新浏览器
  */
@@ -74,7 +148,7 @@ gulp.task('start', ['browser-sync'], function () {
         script : './bin/www',
         ext    : 'js',
         verbose: true,
-        ignore : ["common/*", "gulpfile.js", "ember/js/**/*", "admin/js/**/*", "admin/views/**/*"],
+        ignore : ["common/*", "gulpfile.js", "ember/js/**/*", "admin/js/**/*", "admin/views/**/*", "package.json"],
         env    : {
             'NODE_ENV': 'development',
             'DEBUG'   : 'Website:*',

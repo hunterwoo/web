@@ -303,14 +303,21 @@
         }
     }
 
-    postsEditorCtrl.$inject = ["$scope", "$http", "SweetAlert"]
-    function postsEditorCtrl($scope, $http, SweetAlert) {
+    postsEditorCtrl.$inject = ["$scope", "$http", "SweetAlert", "$uibModal"]
+    function postsEditorCtrl($scope, $http, SweetAlert, $uibModal) {
         $http({
             method: "GET",
             url   : "/posts/" + $scope.$stateParams.id
         }).success(function (data) {
             $scope.post = data;
         })
+        $scope.open = function () {
+            $uibModal.open({
+                animation  : true,
+                templateUrl: 'views/template/markdownContent.html',
+                size       : "md"
+            });
+        };
         $scope.ok = function () {
             return $http({
                 method: "PUT",

@@ -14,6 +14,7 @@ var admin = angular.module("admin", [
     "ngCookies",
     "ngSweetAlertFull",
     "ngSanitize",
+    "akoenig.deckgrid",
     "tc.chartjs"
 ]).run(["$rootScope", "$state", "$stateParams", "loginService", "$templateCache",
     function ($rootScope, $state, $stateParams, loginService, $templateCache) {
