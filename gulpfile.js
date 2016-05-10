@@ -69,7 +69,7 @@ var copyConfig = {
         './views*/error*',
         './admin*/views*/**/*'
     ],
-    image : [
+    image  : [
         './common*/img*/**/*'
     ],
     node_js: [
@@ -123,9 +123,9 @@ gulp.task("init", ['less'], function () {
     ]).pipe(useref({
         searchPath: './'
     }))
-        .pipe(gulpif("*.js", gulpif(production, uglify())))
+        .pipe(gulpif("*.js", uglify()))
         .pipe(gulpif("*.js", header(banner, {pkg: pkg})))
-        .pipe(gulpif("*.css", gulpif(production, cleanCss())))
+        .pipe(gulpif("*.css", cleanCss()))
         .pipe(gulp.dest('./dist/'))
 })
 
