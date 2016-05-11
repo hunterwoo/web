@@ -19,6 +19,7 @@ var admin = angular.module("admin", [
 ]).run(["$rootScope", "$state", "$stateParams", "loginService", "$templateCache",
     function ($rootScope, $state, $stateParams, loginService, $templateCache) {
         $rootScope.title = "Blog";
+
         var nav = navigator.userAgent.toLowerCase();//--返回代表浏览器名和版本号的字符串--
         $rootScope.isWeixin = "micromessenger" == nav.match(/MicroMessenger/i);//--微信浏览器--
         $rootScope.isiOSChrome = "crios" == nav.match(/CriOS/i);//--iPhone下的Chrome浏览器--

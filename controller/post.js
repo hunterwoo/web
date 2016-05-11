@@ -2,8 +2,14 @@
  * Created by Administrator on 2016/5/9 0009.
  */
 var Post = global.dbHelper.getModel("Post");
-var debug = require('debug')('Website:http');
-var markdown = require('markdown').markdown;
+var debug = require('debug')('Website:posts');
+
+var showdown  = require('showdown'),
+    converter = new showdown.Converter();
+//html : converter.makeHtml(req.body.markdown || ""),
+
+//var markdown = require('markdown').markdown;
+//html : markdown.toHTML(req.body.markdown || ""),
 
 module.exports = {
     add    : add,
@@ -18,7 +24,7 @@ function add(req, res) {
     Post.create({
         title           : req.body.title,
         markdown        : req.body.markdown,
-        html            : markdown.toHTML(req.body.markdown || ""),
+        html            : converter.makeHtml(req.body.markdown || ""),
         image           : req.body.coverImg,
         meta_title      : req.body.meta_title,
         meta_description: req.body.meta_description
@@ -80,6 +86,7 @@ function remove(req, res) {
         }
     })
 }
+
 function update(req, res) {
     var _id = req.body._id;
     debug(_id);
@@ -87,7 +94,7 @@ function update(req, res) {
         $set: {
             title           : req.body.title,
             markdown        : req.body.markdown,
-            html            : markdown.toHTML(req.body.markdown || ""),
+            html            : converter.makeHtml(req.body.markdown || ""),
             image           : req.body.coverImg,
             meta_title      : req.body.meta_title,
             meta_description: req.body.meta_description

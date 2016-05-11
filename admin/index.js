@@ -5,7 +5,8 @@
 var express = require('express'),
     app     = express(),
     path    = require('path'),
-    router  = require('./router');
+    router  = require('./router'),
+    userCtrl = require('../controller/user');
 
 app.set('view engine', 'html');
 app.engine('.html', require('ejs').__express);

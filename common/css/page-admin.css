@@ -14,11 +14,6 @@ tr:hover .row-actions {
 body {
   overflow-x: hidden;
 }
-.posts-markdown {
-  resize: none;
-  border: none;
-  min-height: 500px;
-}
 .border-none {
   border: none;
 }
@@ -79,6 +74,23 @@ body {
   overflow-y: auto;
   position: relative;
 }
+.markdown-view .view-container {
+  display: -webkit-flex;
+  /* Safari */
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+}
+.markdown-view .view-container > div {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.markdown-view .view-container > div > textarea {
+  height: 100%;
+  resize: none;
+  border: none;
+}
 .modal-markdown-help-table {
   margin: 0 0 20px;
   width: 100%;
@@ -97,4 +109,9 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+}
+@media (max-width: 767px) {
+  .posts-markdown {
+    min-height: 500px;
+  }
 }

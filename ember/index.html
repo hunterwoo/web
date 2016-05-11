@@ -52,7 +52,7 @@
 <!-- build:template.js  /ember/js/template.js -->
 <script type="text/x-handlebars" data-template-name="application">
     {{loading-bar isLoading=isAjaxLoading}}
-    <aside class="left_col text-center">
+    <aside class="left_col text-center" style="z-index:10">
         <div class="profile">
             <a href="/">
                 <img alt="HOME" class="img-circle profile_picture" src="/common/img/logo.jpg">
@@ -99,10 +99,9 @@
             </a>
         </div>
     </aside>
-    <div class="right_col container-fluid">
+    <div class="right_col container-fluid"  style="z-index:100">
         <header class="nav_header">
-            <div class="nav_btn" {{action
-            'open_side' on="click"}}><i></i>
+            <div class="nav_btn" {{action 'open_side' on="click"}}><i></i>
     </div>
     <h1>{{#link-to "index" title="主页" class="btn-lick"}}ZEEV的小站{{/link-to}}</h1>
     {{#link-to "about" title="关于" class="profile_sm"}}<img alt="zeev" src="/common/img/logo.jpg">{{/link-to}}
@@ -177,6 +176,7 @@
                 <h2 class="title">{{model.title}}</h2>
                 {{posts-dynamic posts=model}}
             </header>
+            <hr>
             {{#if model.coverImg}}
             <div class="posts_cover">
                 <img class="img-responsive" {{bind-attr src=model.coverImg}}>

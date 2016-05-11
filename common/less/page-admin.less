@@ -17,12 +17,6 @@ body {
   overflow-x : hidden;
 }
 
-.posts-markdown {
-  resize     : none;
-  border     : none;
-  min-height : 500px;
-}
-
 .border-none {
   border : none;
 }
@@ -82,11 +76,29 @@ body {
     overflow-y : auto;
     position   : relative;
   }
+  .view-container {
+    display         : -webkit-flex; /* Safari */
+    display         : flex;
+    align-items     : stretch;
+    justify-content : center;
+    flex-direction  : row;
+    > div {
+      flex-grow   : 1;
+      flex-shrink : 1;
+      > textarea {
+        height : 100%;
+        resize : none;
+        border : none;
+      }
+    }
+  }
 }
+
 .modal-markdown-help-table {
-  margin: 0 0 20px;
-  width: 100%;
+  margin : 0 0 20px;
+  width  : 100%;
 }
+
 .markdown-help-icon:hover, .markdown-help-label:hover {
   cursor : help;
 }
@@ -101,4 +113,10 @@ body {
   margin         : 0;
   padding        : 0;
   width          : 100%;
+}
+
+@media (max-width : 767px) {
+  .posts-markdown {
+    min-height : 500px;
+  }
 }

@@ -3,6 +3,7 @@
  */
 
 var Log = global.dbHelper.getModel("Log");
+var debug = require('debug')('Website:log');
 
 module.exports = {
     getLogs: getLogs

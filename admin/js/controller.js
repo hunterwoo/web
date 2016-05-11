@@ -351,15 +351,15 @@
                 data  : $scope.posts,
                 url   : "/posts"
             }).success(function (data) {
-                //SweetAlert.swal("Good job!", "添加成功!", "success");
-                SweetAlert.swal({
-                    title            : "添加成功!",
-                    type             : "success",
-                    confirmButtonText: "查看",
-                    closeOnConfirm   : true
-                }, function () {
-                    $scope.$state.go("posts.info", {id: data._id});
-                })
+                SweetAlert.swal("Good job!", "添加成功!", "success");
+                //SweetAlert.swal({
+                //    title            : "添加成功!",
+                //    type             : "success",
+                //    confirmButtonText: "查看",
+                //    closeOnConfirm   : true
+                //}, function () {
+                //    $scope.$state.go("posts.info", {id: data._id});
+                //})
             })
         }
     }

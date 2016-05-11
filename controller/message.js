@@ -3,6 +3,7 @@
  */
 
 var Message = global.dbHelper.getModel("Message");
+var debug = require('debug')('Website:message');
 
 module.exports = {
     addMessage: addMessage,

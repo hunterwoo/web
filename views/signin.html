@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7" ng-app="app"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" class="no-js lt-ie9 lt-ie8" ng-app="app"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" class="no-js lt-ie9" ng-app="app"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js" ng-app="app"> <!--<![endif]-->
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link rel="stylesheet" href="/common/css/signin.css" type="text/css">
+    <link rel="stylesheet" href="/bower_components/v-button/dist/v-button.css" type="text/css">
+
+</head>
+<body>
+<div class="container height-full flow-content">
+    <section class="flow-content" ng-controller="signinCtrl as sgCtrl">
+        <form class="signin">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="帐号" ng-model="sgCtrl.user.name"
+                       required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="密码" class="form-control"
+                       ng-model="sgCtrl.user.password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-block btn-lg btn-primary" v-busy="" v-busy-click="sgCtrl.signin()">
+                    登录
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/libs/v-button.js"></script>
+<script type="text/javascript">
+    angular.module("app", ["vButton"])
+            .run(["$rootScope", "$http", function ($rootScope, $http) {
+            }]).controller("signinCtrl", ["$http", "$window", function ($http, $window) {
+                var _this = this;
+                _this.signin = function () {
+                    return $http({
+                        method: "POST",
+                        url   : 'signin',
+                        data  : _this.user
+                    }).success(function (data, status, headers, config) {
+                        switch (status) {
+                            case 300 :
+                                $window.location.href = "/admin/";//--需要重定向--
+                                break;
+                            case 302 :
+                                $window.location.href = "/admin/";//--需要浏览器重定向--
+                                break;
+                            default:
+                                break;
+                        }
+                    }).error(function (data, status, headers, config) {
+                        switch (status) {
+                            case 300 :
+                                $window.location.href = "/admin/";//--需要重定向--
+                                break;
+                            case 302 :
+                                $window.location.href = "/admin/";//--需要浏览器重定向--
+                                break;
+                                break;
+                            default:
+                                break;
+                        }
+                    })
+                }
+            }])
+</script>
+</body>
+</html>
