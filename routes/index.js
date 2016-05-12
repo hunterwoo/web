@@ -13,6 +13,7 @@ router.get('/', function (req, res, next) {
 router.get('/signin', userCtrl.showSignin);
 
 router.post('/signin', userCtrl.signin);
+router.get('/signout', userCtrl.signout);
 
 module.exports = function (app) {
     app.use("/", router);

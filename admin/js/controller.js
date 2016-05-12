@@ -273,7 +273,7 @@
         var _this = this;
         $http({
             method: "GET",
-            url   : "/posts"
+            url   : "/posts?part"
         }).success(function (data) {
             $scope.posts = data;
         });

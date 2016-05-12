@@ -3,13 +3,6 @@
  */
 ZEEV.Router.map(function () {
     this.resource('index', {path: '/'})
-    this.resource('article', function () {
-        //deferReadiness
-        //advanceReadiness
-        this.route('info', {path: '/:article_id'}, function () {
-
-        });
-    })
     this.resource('posts', function () {
         this.route('info', {path: '/:posts_id'}, function () {
 
@@ -39,21 +32,10 @@ ZEEV.ApplicationRoute = Ember.Route.extend({
     }
 })
 
-ZEEV.ArticleRoute = Ember.Route.extend({
-    model: function () {
-        return Ember.$.getJSON('/posts');
-    }
-});
-
-ZEEV.ArticleInfoRoute = Ember.Route.extend({
-    model: function (params) {
-        return Ember.$.getJSON('/posts/' + params.article_id);
-    }
-});
 
 ZEEV.PostsRoute = Ember.Route.extend({
     model: function () {
-        return Ember.$.getJSON('/posts');
+        return Ember.$.getJSON('/posts?part111');
     }
 });
 

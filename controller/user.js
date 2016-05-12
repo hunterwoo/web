@@ -8,7 +8,8 @@ var User = global.dbHelper.getModel("User");
 module.exports = {
     adminRequired: adminRequired,
     showSignin   : showSignin,
-    signin       : signin
+    signin       : signin,
+    signout      : signout
 }
 function adminRequired(req, res, next) {
     var user = req.session.user;
@@ -36,26 +37,30 @@ function signin(req, res) {
             res.sendStatus(500);
         }
         if (!user) {
-            res.status(403).send({"msg": "帐号不存在"});
+            res.sendStatus(403);
         } else {
             user.compare(_user, function (err, isMatch) {
                 if (err) {
                     res.sendStatus(500);
                 }
-                if (isMatch) {
+                if (isMatch && user.role >= 10) {
                     req.session.user = user;
                     res.cookie('active', 'true');
                     res.cookie('name', user.name);
                     res.cookie('role', user.role);
-                    if (user.role >= 10) {
-                        res.status(300).send({"url": '/admin'})
-                    } else {
-                        res.status(300).send({"url": '/'})
-                    }
+                    res.sendStatus(200);
                 } else {
                     res.sendStatus(403);
                 }
             })
         }
     })
+}
+
+function signout(req, res) {
+    delete req.session.user;
+    res.clearCookie('active');
+    res.clearCookie('name');
+    res.clearCookie('role');
+    return res.sendStatus(200);
 }

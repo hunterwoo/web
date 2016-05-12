@@ -25,7 +25,8 @@ function add(req, res) {
         title           : req.body.title,
         markdown        : req.body.markdown,
         html            : converter.makeHtml(req.body.markdown || ""),
-        image           : req.body.coverImg,
+        image           : req.body.image,
+        author          : req.session.user,
         meta_title      : req.body.meta_title,
         meta_description: req.body.meta_description
     }, function (err, post) {
@@ -43,16 +44,28 @@ function getList(req, res, next) {
         .find({})
         .sort({'updated_at': -1})
         .limit(limit)
-        .populate('author', 'name')
-        .exec(function (err, post) {
+        //.populate('author', 'name')
+        .populate({path: 'author', select: 'name'})
+        .exec(function (err, posts) {
             if (err) {
-                console.log(err)
+                debug(err);
                 return res.sendStatus(500);
             }
-            if (!post) {
-                post = []
+            if (typeof req.query.part == "string") {
+                var reg = /(<[/]+(.*?)>)|(<(.*?)>)|(\n)/g;
+                posts.map(function (post) {
+                    var index;
+                    if (post.html.length > 100) {
+                        index = post.html.indexOf(' ', 100);
+                        index = index > 200 ? 100 : index;
+                    }else{
+                        index = post.html.length;
+                    }
+                    post.html = post.html.replace(reg, '').substring(0, index);
+                    post.markdown = "";
+                })
             }
-            return res.status(200).send(post);
+            return res.status(200).send(posts);
         })
 }
 
@@ -61,7 +74,7 @@ function get(req, res) {
     debug(_id);
     Post.findById(_id, function (err, post) {
         if (err) {
-            console.log(err);
+            debug(err);
             return res.sendStatus(500);
         }
         if (!post) {
@@ -76,7 +89,7 @@ function remove(req, res) {
     debug(_id);
     Post.findByIdAndRemove(_id, function (err, doc) {
         if (err) {
-            console.log(err);
+            debug(err);
             return res.sendStatus(500);
         }
         if (doc) {
@@ -95,13 +108,13 @@ function update(req, res) {
             title           : req.body.title,
             markdown        : req.body.markdown,
             html            : converter.makeHtml(req.body.markdown || ""),
-            image           : req.body.coverImg,
+            image           : req.body.image,
             meta_title      : req.body.meta_title,
             meta_description: req.body.meta_description
         }
     }, function (err, doc) {
         if (err) {
-            console.log(err);
+            debug(err);
             return res.sendStatus(500);
         }
         if (doc) {

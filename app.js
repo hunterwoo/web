@@ -45,8 +45,6 @@ app.set('view engine', 'html');
 app.engine('.html', require('ejs').__express);
 
 
-// uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'common', 'favicon.ico')));
 //morgan.token('date', function (req, res) {
 //    return req.headers['content-type'];
 //})
@@ -54,8 +52,11 @@ app.use(favicon(path.join(__dirname, 'common', 'favicon.ico')));
 app.use(morgan('combined', {stream: accessLog}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+// uncomment after placing your favicon in /public
+app.use(favicon(path.join(__dirname, './common/img', 'favicon.ico')));
 app.use('/bower_components', express.static(path.join(__dirname, './bower_components')));
-app.use('/node_modules', express.static(path.join(__dirname, './node_modules')));
+app.use('/node_modules/showdown', express.static(path.join(__dirname, './node_modules/showdown')));
+app.use('/node_modules/ember-cli-loading-slider', express.static(path.join(__dirname, './node_modules/ember-cli-loading-slider')));
 app.use('/common', express.static(path.join(__dirname, './common')));
 app.use('/libs', express.static(path.join(__dirname, './libs')));
 app.use('/ember', express.static(path.join(__dirname, './ember')));

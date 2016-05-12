@@ -638,6 +638,9 @@ article .posts_abstract {
   word-wrap: break-word;
   word-break: normal;
 }
+article .posts_html > a {
+  margin-left: 5px;
+}
 article + article {
   padding-top: 1.2rem;
 }
@@ -700,6 +703,8 @@ article > header a {
 .pace .pace-progress {
   background: #252425 none repeat scroll 0 0;
   height: 4px;
+  position: absolute;
+  top: 0;
   -webkit-transition: width 0.5s cubic-bezier(1, 0, 0, 1);
   -moz-transition: width 0.5s cubic-bezier(1, 0, 0, 1);
   -o-transition: width 0.5s cubic-bezier(1, 0, 0, 1);

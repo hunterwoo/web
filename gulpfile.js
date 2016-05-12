@@ -12,6 +12,7 @@ var gulp        = require('gulp'),
     pkg         = require('./package.json'),
     header      = require('gulp-header'),
     cleanCss    = require("gulp-clean-css"),
+    argv        = require('yargs').argv,
     browserSync = require('browser-sync').create(),
     reload      = browserSync.reload;
 
@@ -147,9 +148,9 @@ gulp.task('start', ['browser-sync'], function () {
         verbose: true,
         ignore : ["common/*", "gulpfile.js", "ember/js/**/*", "admin/js/**/*", "admin/views/**/*", "package.json"],
         env    : {
-            'NODE_ENV': 'development',
-            'DEBUG'   : 'Website:*',
-            "PORT"    : 4222
+            'NODE_ENV': argv.production || 'development',
+            'DEBUG'   : argv.DEBUG || 'Website:*',
+            "PORT"    : argv.PORT || 4222
         }
     }).on('start', function () {
         reload();

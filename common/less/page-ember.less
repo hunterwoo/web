@@ -595,6 +595,9 @@ article {
     word-wrap  : break-word;
     word-break : normal;
   }
+  .posts_html > a {
+    margin-left : 5px;
+  }
 }
 
 article + article {
@@ -672,15 +675,16 @@ article > header a {
   top              : 0;
   width            : 100%;
   z-index          : 2000;
-}
-
-.pace .pace-progress {
-  background         : #252425 none repeat scroll 0 0;
-  height             : 4px;
-  -webkit-transition : width 0.5s cubic-bezier(1, 0, 0, 1);
-  -moz-transition    : width 0.5s cubic-bezier(1, 0, 0, 1);
-  -o-transition      : width 0.5s cubic-bezier(1, 0, 0, 1);
-  transition         : width 0.5s cubic-bezier(1, 0, 0, 1);
+  .pace-progress {
+    background         : #252425 none repeat scroll 0 0;
+    height             : 4px;
+    position           : absolute;
+    top                : 0;
+    -webkit-transition : width 0.5s cubic-bezier(1, 0, 0, 1);
+    -moz-transition    : width 0.5s cubic-bezier(1, 0, 0, 1);
+    -o-transition      : width 0.5s cubic-bezier(1, 0, 0, 1);
+    transition         : width 0.5s cubic-bezier(1, 0, 0, 1);
+  }
 }
 
 .pace-inactive {

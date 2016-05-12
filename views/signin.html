@@ -51,28 +51,7 @@
                         url   : 'signin',
                         data  : _this.user
                     }).success(function (data, status, headers, config) {
-                        switch (status) {
-                            case 300 :
-                                $window.location.href = "/admin/";//--需要重定向--
-                                break;
-                            case 302 :
-                                $window.location.href = "/admin/";//--需要浏览器重定向--
-                                break;
-                            default:
-                                break;
-                        }
-                    }).error(function (data, status, headers, config) {
-                        switch (status) {
-                            case 300 :
-                                $window.location.href = "/admin/";//--需要重定向--
-                                break;
-                            case 302 :
-                                $window.location.href = "/admin/";//--需要浏览器重定向--
-                                break;
-                                break;
-                            default:
-                                break;
-                        }
+                        $window.location.href = "/admin/";//--需要重定向--
                     })
                 }
             }])

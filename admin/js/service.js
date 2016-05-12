@@ -20,9 +20,9 @@
             auth.signout = function () {
                 $http({
                     method: "GET",
-                    url   : "signout"
+                    url   : "/signout"
                 }).success(function () {
-                    $window.location.href = "/";
+                    $window.location.href = "/ember";
                 })
             };
             auth.getId = function () {

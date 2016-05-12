@@ -2,7 +2,7 @@
     <div class="panel-heading">
         <div class="media clearfix">
             <a class="pull-left">
-                <img src="/common/img/profile_picture.jpg" alt="profile-picture">
+                <img src="/common/img/profile-picture.jpg" alt="profile-picture">
             </a>
 
             <div class="media-body">
@@ -15,7 +15,7 @@
     <div class="panel-body">
         <a ui-sref="^.info({id:card._id})"><h4 ng-bind="::card.title"></h4></a>
 
-        <p>
+        <p ng-if="card.image">
             <img class="img-responsive" src="{{::card.image}}">
         </p>
 

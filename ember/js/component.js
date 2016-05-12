@@ -3,28 +3,108 @@
  */
 
 ZEEV.LoadingBarComponent = Ember.Component.extend({
-    classNames: ['pace animated-panel'],
-    classNameBindings: ['isLoading::hidden']
+    classNames      : ['pace animated-panel'],
+    //classNameBindings: ['isLoading::hidden'],
+    manage          : function () {
+        this.get("isLoading") ? this.get("expanding") ? this.expandingAnimate.call(this) : this.animate.call(this) : this.set("isLoaded", !0)
+    }.observes("isLoading"),
+    animate         : function () {
+        this.set("isLoaded", !1);
+        var self        = this,
+            elapsedTime = 10,
+            inner       = $('<div class="pace-progress"><\/div>'),
+            outer       = this.$(),
+            duration    = 300,
+            innerWidth  = 50,
+            outerWidth  = this.$().width(),
+            stepWidth   = Math.round(outerWidth / 50),
+            color       = this.get('color') || "#000";
+        outer.append(inner);
+        if (color) {
+            inner.css('background-color', color);
+        }
+        var interval = window.setInterval(function () {
+            innerWidth = innerWidth + stepWidth;
+            inner.width(innerWidth);
+            if (innerWidth > (outerWidth * 0.66)) {
+                // don't stop the animation completely
+                if (stepWidth > 1) {
+                    stepWidth = stepWidth * 0.97;
+                }
+            }
+            if (innerWidth > outerWidth) {
+                outer.empty();
+                window.clearInterval(interval);
+            }
+            if (self.get('isLoaded')) {
+                if (stepWidth < 10) {
+                    stepWidth = 10;
+                }
+                stepWidth = stepWidth + stepWidth;
+            }
+        }, 10)
+    },
+    expandingAnimate: function () {
+        var self       = this,
+            outer      = this.$(),
+            speed      = 1000,
+            colorQueue = this.get('color')||"#000";
+        this.expandItem.call(this, colorQueue, true);
+    },
+    expandItem      : function (color, cleanUp) {
+        var self       = this,
+            inner      = $('<span>').css({'background-color': color}),
+            outer      = this.$(),
+            innerWidth = 0,
+            outerWidth = outer.width(),
+            stepWidth  = Math.round(outerWidth / 50);
+        var ua = window.navigator.userAgent;
+        var ie10   = ua.indexOf("MSIE "),
+            ie11   = ua.indexOf('Trident/'),
+            ieEdge = ua.indexOf('Edge/');
+
+        outer.append(inner);
+        var interval = window.setInterval(function () {
+            var step = (innerWidth = innerWidth + stepWidth);
+            if (innerWidth > outerWidth) {
+                window.clearInterval(interval);
+                if (cleanUp) {
+                    outer.empty();
+                }
+            }
+            if (ie10 > 0 || ie11 > 0 || ieEdge > 0) {
+                inner.css({
+                    'margin': '0 auto',
+                    'width' : step
+                });
+            } else {
+                inner.css({
+                    'margin-left': '-' + step / 2 + 'px',
+                    'width'      : step
+                });
+            }
+        }, 10);
+    }
 })
 
 ZEEV.LoadingSliderComponent = Ember.Component.extend({
-    tagName: "div",
-    classNames: ["loading-slider"],
+    tagName          : "div",
+    classNames       : ["loading-slider"],
     classNameBindings: "expanding",
-    manage: function () {
+    manage           : function () {
         this.get("isLoading") ? this.get("expanding") ? this.expandingAnimate.call(this) : this.animate.call(this) : this.set("isLoaded", !0)
     }.observes("isLoading"),
-    animate: function () {
+    animate          : function () {
         this.set("isLoaded", !1);
-        var self = this,
+        var self        = this,
             elapsedTime = 0,
-            inner = $('<span>'),
-            outer = this.$(),
-            duration = this.getWithDefault('duration', 300),
-            innerWidth = 0,
-            outerWidth = this.$().width(),
-            stepWidth = Math.round(outerWidth / 50),
-            color = this.get('color');
+            inner       = $('<span>'),
+            outer       = this.$(),
+            duration    = this.getWithDefault('duration', 300),
+            innerWidth  = 0,
+            outerWidth  = this.$().width(),
+            stepWidth   = Math.round(outerWidth / 50),
+            color       = this.get('color');
 
         outer.append(inner);
         if (color) {
@@ -53,10 +133,10 @@ ZEEV.LoadingSliderComponent = Ember.Component.extend({
             }
         }, 10)
     },
-    expandingAnimate: function () {
-        var self = this,
-            outer = this.$(),
-            speed = this.getWithDefault('speed', 1000),
+    expandingAnimate : function () {
+        var self       = this,
+            outer      = this.$(),
+            speed      = this.getWithDefault('speed', 1000),
             colorQueue = this.get('color');
         if ('object' === typeof colorQueue) {
             (function updateFn() {
@@ -73,16 +153,16 @@ ZEEV.LoadingSliderComponent = Ember.Component.extend({
             this.expandItem.call(this, colorQueue, true);
         }
     },
-    expandItem: function (color, cleanUp) {
-        var self = this,
-            inner = $('<span>').css({'background-color': color}),
-            outer = this.$(),
+    expandItem       : function (color, cleanUp) {
+        var self       = this,
+            inner      = $('<span>').css({'background-color': color}),
+            outer      = this.$(),
             innerWidth = 0,
             outerWidth = outer.width(),
-            stepWidth = Math.round(outerWidth / 50);
+            stepWidth  = Math.round(outerWidth / 50);
         var ua = window.navigator.userAgent;
-        var ie10 = ua.indexOf("MSIE "),
-            ie11 = ua.indexOf('Trident/'),
+        var ie10   = ua.indexOf("MSIE "),
+            ie11   = ua.indexOf('Trident/'),
             ieEdge = ua.indexOf('Edge/');
 
         outer.append(inner);
@@ -97,17 +177,17 @@ ZEEV.LoadingSliderComponent = Ember.Component.extend({
             if (ie10 > 0 || ie11 > 0 || ieEdge > 0) {
                 inner.css({
                     'margin': '0 auto',
-                    'width': step
+                    'width' : step
                 });
             } else {
                 inner.css({
                     'margin-left': '-' + step / 2 + 'px',
-                    'width': step
+                    'width'      : step
                 });
             }
         }, 10);
     },
-    didInsertElement: function () {
+    didInsertElement : function () {
         this.$().html('<span>');
         var color = this.get('color');
         if (color) {
@@ -122,7 +202,7 @@ ZEEV.PostsDynamicComponent = Ember.Component.extend({
 
 ZEEV.WindowResizeComponent = Ember.Component.extend({
     attributeBindings: ['style'],
-    style: "",
+    style            : "",
     initializeTinyMCE: Ember.on('didInsertElement', function () {
         var _this = this;
         _this.set("style", 'height:' + $(window).height() + 'px')
