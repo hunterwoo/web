@@ -35,7 +35,7 @@ ZEEV.ApplicationRoute = Ember.Route.extend({
 
 ZEEV.PostsRoute = Ember.Route.extend({
     model: function () {
-        return Ember.$.getJSON('/posts?part111');
+        return Ember.$.getJSON('/posts?part');
     }
 });
 

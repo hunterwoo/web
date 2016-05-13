@@ -6,84 +6,55 @@ ZEEV.LoadingBarComponent = Ember.Component.extend({
     classNames      : ['pace animated-panel'],
     //classNameBindings: ['isLoading::hidden'],
     manage          : function () {
-        this.get("isLoading") ? this.get("expanding") ? this.expandingAnimate.call(this) : this.animate.call(this) : this.set("isLoaded", !0)
+        this.get("isLoading") ? this.animate.call(this) : this.set("isLoaded", !0)
     }.observes("isLoading"),
     animate         : function () {
         this.set("isLoaded", !1);
-        var self        = this,
-            elapsedTime = 10,
-            inner       = $('<div class="pace-progress"><\/div>'),
-            outer       = this.$(),
-            duration    = 300,
-            innerWidth  = 50,
-            outerWidth  = this.$().width(),
-            stepWidth   = Math.round(outerWidth / 50),
-            color       = this.get('color') || "#000";
-        outer.append(inner);
+        var self       = this,
+            status     = 0,
+            loadingBar = $('<div class="pace-progress"><\/div>'),
+            color      = this.get('color') || "#000";
+        self.$().append(loadingBar);
         if (color) {
-            inner.css('background-color', color);
+            loadingBar.css('background-color', color);
         }
-        var interval = window.setInterval(function () {
-            innerWidth = innerWidth + stepWidth;
-            inner.width(innerWidth);
-            if (innerWidth > (outerWidth * 0.66)) {
-                // don't stop the animation completely
-                if (stepWidth > 1) {
-                    stepWidth = stepWidth * 0.97;
-                }
-            }
-            if (innerWidth > outerWidth) {
-                outer.empty();
+        var interval;
+        var _inc = function () {
+            status = self.getStatus(status);
+            var pct = (status * 100) + '%';
+            loadingBar.css('width', pct);
+            if(self.get("isLoaded")){
                 window.clearInterval(interval);
+                loadingBar.css('width', "100%");
+                Ember.run.later(function () {
+                    self.$().empty();
+                }, 500);
             }
-            if (self.get('isLoaded')) {
-                if (stepWidth < 10) {
-                    stepWidth = 10;
-                }
-                stepWidth = stepWidth + stepWidth;
-            }
-        }, 10)
+        }
+        interval = window.setInterval(function () {
+            _inc();
+        }, 500)
     },
-    expandingAnimate: function () {
-        var self       = this,
-            outer      = this.$(),
-            speed      = 1000,
-            colorQueue = this.get('color')||"#000";
-        this.expandItem.call(this, colorQueue, true);
-    },
-    expandItem      : function (color, cleanUp) {
-        var self       = this,
-            inner      = $('<span>').css({'background-color': color}),
-            outer      = this.$(),
-            innerWidth = 0,
-            outerWidth = outer.width(),
-            stepWidth  = Math.round(outerWidth / 50);
-        var ua = window.navigator.userAgent;
-        var ie10   = ua.indexOf("MSIE "),
-            ie11   = ua.indexOf('Trident/'),
-            ieEdge = ua.indexOf('Edge/');
-
-        outer.append(inner);
-        var interval = window.setInterval(function () {
-            var step = (innerWidth = innerWidth + stepWidth);
-            if (innerWidth > outerWidth) {
-                window.clearInterval(interval);
-                if (cleanUp) {
-                    outer.empty();
-                }
-            }
-            if (ie10 > 0 || ie11 > 0 || ieEdge > 0) {
-                inner.css({
-                    'margin': '0 auto',
-                    'width' : step
-                });
-            } else {
-                inner.css({
-                    'margin-left': '-' + step / 2 + 'px',
-                    'width'      : step
-                });
-            }
-        }, 10);
+    getStatus       : function (_status) {
+        var rnd = 0;
+        var stat = _status;
+        if (stat >= 0 && stat < 0.25) {
+            // Start out between 3 - 6% increments
+            rnd = 6 / 100;
+        } else if (stat >= 0.25 && stat < 0.65) {
+            // increment between 0 - 3%
+            rnd = 3 / 100;
+        } else if (stat >= 0.65 && stat < 0.9) {
+            // increment between 0 - 2%
+            rnd = 1 / 100;
+        } else if (stat >= 0.9 && stat < 0.97) {
+            // finally, increment it .5 %
+            rnd = 0.005;
+        } else {
+            // after 99%, don't increment:
+            rnd = 0;
+        }
+        return _status + rnd;
     }
 })
 

@@ -12,6 +12,7 @@ var gulp        = require('gulp'),
     pkg         = require('./package.json'),
     header      = require('gulp-header'),
     cleanCss    = require("gulp-clean-css"),
+    htmlmin     = require("gulp-htmlmin"),
     argv        = require('yargs').argv,
     browserSync = require('browser-sync').create(),
     reload      = browserSync.reload;
@@ -63,8 +64,10 @@ gulp.task('less-watch', ['less'], function () {
 
 var copyConfig = {
     html   : [
-        "./views*/404*",
+        './views*/index*',
+        './views*/404*',
         './views*/error*',
+        './views*/signin*',
         './admin*/views*/**/*'
     ],
     image  : [

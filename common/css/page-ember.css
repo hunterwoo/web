@@ -228,7 +228,7 @@ header.nav_header .profile_sm img {
     -moz-transform: translate(-150px, 0);
     -o-transform: translate(-150px, 0);
     -ms-transform: translate(-150px, 0);
-    width: 167px;
+    width: 150px;
   }
   .profile {
     margin-top: 50px;
@@ -309,7 +309,7 @@ header.nav_header .profile_sm img {
     -moz-transform: translate(0, 0);
     -o-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
-    width: 92px;
+    width: 75px;
   }
   .stats-label h1 {
     font-size: 1.5rem;
@@ -335,10 +335,11 @@ header.nav_header .profile_sm img {
 .axis_time {
   position: absolute;
   top: 50%;
-  margin-top: -2rem;
   height: 4rem;
   width: 100%;
   z-index: 10;
+  margin: -2rem auto 0;
+  text-align: center;
 }
 .axis_time li {
   display: inline-block;
@@ -465,7 +466,7 @@ header.nav_header .profile_sm img {
 }
 @media (max-width: 480px) {
   .axis_time li {
-    margin-right: 3rem;
+    margin: 0 1rem;
     width: 20%;
   }
   .axis_time li:nth-child(even) .content {
@@ -705,28 +706,8 @@ article > header a {
   height: 4px;
   position: absolute;
   top: 0;
-  -webkit-transition: width 0.5s cubic-bezier(1, 0, 0, 1);
-  -moz-transition: width 0.5s cubic-bezier(1, 0, 0, 1);
-  -o-transition: width 0.5s cubic-bezier(1, 0, 0, 1);
-  transition: width 0.5s cubic-bezier(1, 0, 0, 1);
-}
-.pace-inactive {
-  display: none;
-}
-.loading-slider {
-  height: 2px;
-  left: 0;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 999;
-}
-.loading-slider.expanding {
-  text-align: center;
-}
-.loading-slider span {
-  background-color: red;
-  height: 2px;
-  position: inherit;
+  transition: width 0.5s linear;
+  -moz-transition: width 0.5s linear;
+  -o-transition: width 0.5s linear;
+  -webkit-transition: width 0.5s linear;
 }
