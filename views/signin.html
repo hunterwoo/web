@@ -14,8 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
+    <!-- build:css  /common/css/signin.css -->
     <link rel="stylesheet" href="/common/css/signin.css" type="text/css">
     <link rel="stylesheet" href="/bower_components/v-button/dist/v-button.css" type="text/css">
+    <!-- endbuild -->
 
 </head>
 <body>
@@ -38,8 +40,11 @@
         </form>
     </section>
 </div>
+
+<!-- build:js  /common/libs/signin.js -->
 <script src="/bower_components/angular/angular.js"></script>
 <script src="/libs/v-button.js"></script>
+<!-- endbuild -->
 <script type="text/javascript">
     angular.module("app", ["vButton"])
             .run(["$rootScope", "$http", function ($rootScope, $http) {

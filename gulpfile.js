@@ -118,6 +118,7 @@ gulp.task('build', ['clean'], function () {
 gulp.task("init", ['less'], function () {
     return gulp.src([
         './view*/index.html',
+        './view*/signin.html',
         './admin*/index.html',
         './ember*/index.html'
     ]).pipe(useref({
