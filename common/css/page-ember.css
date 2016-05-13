@@ -693,8 +693,8 @@ article > header a {
 }
 /*  components  */
 .pace {
-  background-color: #fff;
-  height: 4px;
+  background-color: transparent;
+  height: 2px;
   left: 0;
   position: fixed;
   top: 0;
@@ -703,11 +703,12 @@ article > header a {
 }
 .pace .pace-progress {
   background: #252425 none repeat scroll 0 0;
-  height: 4px;
+  height: 2px;
+  width: 0;
   position: absolute;
   top: 0;
-  transition: width 0.5s linear;
-  -moz-transition: width 0.5s linear;
-  -o-transition: width 0.5s linear;
-  -webkit-transition: width 0.5s linear;
+  transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  -webkit-transition: all 0.5s linear;
 }

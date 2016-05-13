@@ -40,8 +40,7 @@ function add(req, res) {
 function getList(req, res, next) {
     debug(req.query);
     var limit = parseInt(req.query.limit) || 0;
-    Post
-        .find({})
+    Post.find({})
         .sort({'updated_at': -1})
         .limit(limit)
         //.populate('author', 'name')
@@ -58,7 +57,7 @@ function getList(req, res, next) {
                     if (post.html.length > 100) {
                         index = post.html.indexOf(' ', 100);
                         index = index > 200 ? 100 : index;
-                    }else{
+                    } else {
                         index = post.html.length;
                     }
                     post.html = post.html.replace(reg, '').substring(0, index);
@@ -72,7 +71,7 @@ function getList(req, res, next) {
 function get(req, res) {
     var _id = req.params._id || req.query._id;
     debug(_id);
-    Post.findById(_id, function (err, post) {
+    Post.getOneById(_id, function (err, post) {
         if (err) {
             debug(err);
             return res.sendStatus(500);
@@ -80,7 +79,19 @@ function get(req, res) {
         if (!post) {
             return res.status(404).send({"msg": "post不存在"});
         }
-        return res.status(200).send(post);
+        Post
+            .find({_id: {"$gt": _id}}, "_id title")
+            .sort({'updated_at': -1})
+            .limit(1)
+            .exec(function (err, nextPost) {
+                if (err) {
+                    debug(err);
+                    return res.sendStatus(500);
+                }
+                post.nextPost = nextPost[0];
+                debug(post.nextPost);
+                return res.status(200).send(post);
+            })
     })
 }
 

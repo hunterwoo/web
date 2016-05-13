@@ -60,7 +60,7 @@
         </div>
         <div class="stats-label">
             <h1>
-                {{model.name}}
+                zeev
             </h1>
             <ul class="nav nav-tabs nav-justified nav_color">
                 <li>
@@ -132,6 +132,12 @@
     </div>
 </script>
 
+<script type="text/x-handlebars" data-template-name="error404">
+    <div style="flex: 1">
+        <h1 style="font-size: 100px;text-align: center;flex: 1">404</h1>
+    </div>
+</script>
+
 <script type="text/x-handlebars" data-template-name="components/window-resize">
     {{yield}}
 </script>
@@ -181,7 +187,11 @@
             <div class="posts_content">{{{model.html}}}</div>
         </article>
         <div class="posts_nav clearfix">
-            阅读下一篇
+            {{#if model.nextPost}}
+            <p>阅读下一篇{{#link-to "posts.info" model.nextPost._id}}{{model.nextPost}}{{/link-to}}</p>
+            {{else}}
+            <p>没有更多了</p>
+            {{/if}}
         </div>
     </div>
     <footer class="posts_footer">

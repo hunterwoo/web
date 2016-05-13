@@ -35,6 +35,26 @@ PostSchema.pre('update', function (next) {
     next();
 });
 
-PostSchema.statics = {}
+PostSchema.statics = {
+    getList         : function (cb) {
+        return this
+            .find({})
+            .populate({path: 'author', select: 'name'})
+            .sort({'updated_at': -1})
+            .exec(cb)
+    },
+    getOneById      : function (id, cb) {
+        return this
+            .findOne({_id: id})
+            .populate({path: 'author', select: 'name'})
+            .exec(cb)
+    },
+    findByIdForViews: function (id, cb) {
+        return this
+            .findOne({_id: id})
+            .populate('author', 'name')
+            .exec(cb)
+    }
+}
 
 module.exports = PostSchema;

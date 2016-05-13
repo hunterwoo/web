@@ -3,39 +3,43 @@
  */
 
 ZEEV.LoadingBarComponent = Ember.Component.extend({
-    classNames      : ['pace animated-panel'],
+    classNames: ['pace animated-panel'],
     //classNameBindings: ['isLoading::hidden'],
-    manage          : function () {
+    manage    : function () {
         this.get("isLoading") ? this.animate.call(this) : this.set("isLoaded", !0)
     }.observes("isLoading"),
-    animate         : function () {
+    animate   : function () {
         this.set("isLoaded", !1);
         var self       = this,
             status     = 0,
-            loadingBar = $('<div class="pace-progress"><\/div>'),
-            color      = this.get('color') || "#000";
+            loadingBar = $('<div class="pace-progress" style="width: 0%"><\/div>'),
+            color      = this.get('color') || "#fcb851";
         self.$().append(loadingBar);
         if (color) {
             loadingBar.css('background-color', color);
         }
         var interval;
         var _inc = function () {
-            status = self.getStatus(status);
+            if (self.get("isLoaded")) {
+                status = status / 100 > 0.5 ? status + 8 / 10 : status + 5 / 10
+            } else {
+                status = self.getStatus(status);
+            }
             var pct = (status * 100) + '%';
             loadingBar.css('width', pct);
-            if(self.get("isLoaded")){
+            if (status >= 1) {
                 window.clearInterval(interval);
-                loadingBar.css('width', "100%");
                 Ember.run.later(function () {
-                    self.$().empty();
+                    loadingBar.remove()
                 }, 500);
             }
         }
+        _inc();
         interval = window.setInterval(function () {
             _inc();
         }, 500)
     },
-    getStatus       : function (_status) {
+    getStatus : function (_status) {
         var rnd = 0;
         var stat = _status;
         if (stat >= 0 && stat < 0.25) {

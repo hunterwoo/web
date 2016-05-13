@@ -45,11 +45,6 @@ app.set('view engine', 'html');
 app.engine('.html', require('ejs').__express);
 
 
-//morgan.token('date', function (req, res) {
-//    return req.headers['content-type'];
-//})
-//app.use(morgan('tiny'));
-app.use(morgan('combined', {stream: accessLog}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 // uncomment after placing your favicon in /public
@@ -61,7 +56,13 @@ app.use('/common', express.static(path.join(__dirname, './common')));
 app.use('/libs', express.static(path.join(__dirname, './libs')));
 app.use('/ember', express.static(path.join(__dirname, './ember')));
 app.use('/admin/js', express.static(path.join(__dirname, './admin/js')));
-app.use('/admin/views', express.static(path.join(__dirname, './admin/views')));
+app.use('/views', express.static(path.join(__dirname, './admin/views')));//--路径bug，自己造成的 T_T --
+
+//morgan.token('date', function (req, res) {
+//    return req.headers['content-type'];
+//})
+//app.use(morgan('tiny'));
+app.use(morgan('combined', {stream: accessLog}));
 
 require('./routes')(app);
 

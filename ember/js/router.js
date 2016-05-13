@@ -11,14 +11,10 @@ ZEEV.Router.map(function () {
     this.resource('about', function () {
 
     })
+    this.route('error404', {path: '/*path'});
 });
+
 ZEEV.ApplicationRoute = Ember.Route.extend({
-    model  : function () {
-        return {
-            name : 'zeev',
-            email: '617070839@qq.com'
-        }
-    },
     actions: {
         willTransition: function () {
             if ($("body").hasClass("side")) {
@@ -31,7 +27,6 @@ ZEEV.ApplicationRoute = Ember.Route.extend({
         }
     }
 })
-
 
 ZEEV.PostsRoute = Ember.Route.extend({
     model: function () {

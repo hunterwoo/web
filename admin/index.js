@@ -5,12 +5,12 @@
 var express = require('express'),
     app     = express(),
     path    = require('path'),
-    router  = require('./router'),
-    userCtrl = require('../controller/user');
+    router  = require('./router');
 
 app.set('view engine', 'html');
 app.engine('.html', require('ejs').__express);
 app.set('views', path.join(__dirname, ''));
+app.use('/views', express.static(path.join(__dirname, './views')));
 
 app.use("/", router);
 

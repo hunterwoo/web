@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var articles = require('./articles');
 var post = require('./post');
 var ember = require('../ember');
 var admin = require('../admin');
@@ -19,6 +18,5 @@ module.exports = function (app) {
     app.use("/", router);
     app.use("/ember", ember);
     app.use("/admin", userCtrl.adminRequired, admin);
-    app.use("/articles", articles);
     app.use("/posts", post);
 };

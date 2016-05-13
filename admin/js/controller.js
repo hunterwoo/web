@@ -73,7 +73,7 @@
             var myNewChart = new Chart(ctx).Line(sharpLineData, sharpLineOptions);
         }
 
-        $http.get("home")
+        $http.get("/admin/home")
             .success(function (data) {
                 data = data;
                 if (data.logs) {
@@ -180,7 +180,7 @@
         var refreshMessage = function () {
             $http({
                 method: "GET",
-                url   : "message/remind"
+                url   : "/admin/message/remind"
             }).success(function (data) {
                 _this.messages.total = data.length;
                 _this.messages.data = data;
@@ -375,4 +375,4 @@
         })
     }
 
-})(angular, $)
+})(angular, $);

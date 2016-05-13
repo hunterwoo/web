@@ -32,7 +32,7 @@ function addMessage(req, res) {
 function getRemind(req, res) {
     Message
         .find({status: 0})
-        .sort({'meta.createAt': -1})
+        .sort({'created_at': -1})
         .exec(function (err, messages) {
             if (err) {
                 console.log(err)
@@ -48,7 +48,7 @@ function getRemind(req, res) {
 function getMessages(req, res) {
     Message
         .find()
-        .sort('meta.createAt')
+        .sort('created_at')
         .exec(function (err, messages) {
             if (err) {
                 console.log(err)
