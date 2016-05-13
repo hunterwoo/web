@@ -14,7 +14,7 @@ module.exports = {
 function adminRequired(req, res, next) {
     var user = req.session.user;
     if (!user) {
-        return res.render('signin', {title: '登录'});
+        return res.redirect('signin', {title: '登录'});
     }
     //if (user.role <= 10) {
     //    return res.status(404).send({msg: '用户权限不够'});
@@ -23,7 +23,7 @@ function adminRequired(req, res, next) {
 }
 
 function showSignin(req, res, next) {
-    return res.render('signin', {title: '登录'});
+    return res.redirect('signin', {title: '登录'});
 }
 
 function signin(req, res) {
