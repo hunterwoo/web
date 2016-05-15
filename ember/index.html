@@ -188,7 +188,7 @@
         </article>
         <div class="posts_nav clearfix">
             {{#if model.nextPost}}
-            <p>阅读下一篇{{#link-to "posts.info" model.nextPost._id}}{{model.nextPost}}{{/link-to}}</p>
+            {{#link-to "posts.info" model.nextPost._id tagName="p"}}阅读下一篇<a>{{model.nextPost.title}}</a>{{/link-to}}
             {{else}}
             <p>没有更多了</p>
             {{/if}}

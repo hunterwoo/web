@@ -11,6 +11,7 @@
         .controller("headerCtrl", headerCtrl)
         .controller("analytiesCtrl", analytiesCtrl)
         .controller('messageListCtrl', messageListCtrl)
+        .controller('postModalInstance', postModalInstance)
         .controller('postsListCtrl', postsListCtrl)
         .controller('postsNewCtrl', postsNewCtrl)
         .controller('postsEditorCtrl', postsEditorCtrl)
@@ -268,6 +269,12 @@
         });
     }
 
+
+    postModalInstance.$inject = ["$scope", "$uibModalInstance", "post"]
+    function postModalInstance($scope, $uibModalInstance, post) {
+        $scope.post = post;
+    };
+
     postsListCtrl.$inject = ["$scope", "$http", "SweetAlert"];
     function postsListCtrl($scope, $http, SweetAlert) {
         var _this = this;
@@ -287,17 +294,17 @@
                 confirmButtonText : "Yes, delete it!",
                 closeOnConfirm    : false
             }, function () {
-                $http({
+                return $http({
                     method: "DELETE",
                     params: {
                         _id: _id
                     },
-                    url   : "/posts"
+                    url   : "/posts/" + _id
                 }).success(function (data) {
                     SweetAlert.swal("Good job!", "删除成功!", "success");
                     $http({
                         method: "GET",
-                        url   : "/posts"
+                        url   : "/posts?part"
                     }).success(function (data) {
                         $scope.posts = data;
                     });
@@ -313,6 +320,7 @@
             url   : "/posts/" + $scope.$stateParams.id
         }).success(function (data) {
             $scope.post = data;
+            $scope.post.tags = [];
         })
         $scope.open = function () {
             $uibModal.open({
@@ -321,6 +329,20 @@
                 size       : "md"
             });
         };
+        $scope.postSettings = function () {
+            $uibModal.open({
+                animation        : true,
+                templateUrl      : 'views/template/post-settings.html',
+                windowTemplateUrl: 'views/template/aside.html',
+                size             : "md aside-right",
+                controller       : 'postModalInstance',
+                resolve          : {
+                    post: function () {
+                        return $scope.post;
+                    }
+                }
+            });
+        }
         $scope.ok = function () {
             return $http({
                 method: "PUT",
@@ -338,29 +360,16 @@
             image   : 'http://img02.tooopen.com/images/20140314/sy_56692371155.jpg',
             markdown: ""
         }
-        $scope.open = function () {
-            $uibModal.open({
-                animation  : true,
-                templateUrl: 'views/template/markdown-content.html',
-                size       : "md"
-            });
-        };
         $scope.ok = function () {
-            $http({
-                method: "POST",
-                data  : $scope.posts,
-                url   : "/posts"
-            }).success(function (data) {
-                SweetAlert.swal("Good job!", "添加成功!", "success");
-                //SweetAlert.swal({
-                //    title            : "添加成功!",
-                //    type             : "success",
-                //    confirmButtonText: "查看",
-                //    closeOnConfirm   : true
-                //}, function () {
-                //    $scope.$state.go("posts.info", {id: data._id});
-                //})
-            })
+            if($scope.posts.title){
+                return $http({
+                    method: "POST",
+                    data  : $scope.posts,
+                    url   : "/posts"
+                }).success(function (data) {
+                    $scope.$state.go("posts.editor", {id: data._id});
+                })
+            }
         }
     }
 
@@ -374,5 +383,6 @@
             $scope.post = data;
         })
     }
+
 
 })(angular, $);

@@ -16,7 +16,7 @@
         <a ui-sref="^.info({id:card._id})"><h4 ng-bind="::card.title"></h4></a>
 
         <p ng-if="card.image">
-            <img class="img-responsive" src="{{::card.image}}">
+            <img class="img-responsive" ng-src="{{::card.image}}">
         </p>
 
         <div ng-bind-html="card.html" style="overflow: hidden;max-height: 200px;"></div>

@@ -21,7 +21,7 @@ ZEEV.LoadingBarComponent = Ember.Component.extend({
         var interval;
         var _inc = function () {
             if (self.get("isLoaded")) {
-                status = status / 100 > 0.5 ? status + 8 / 10 : status + 5 / 10
+                status = 1;
             } else {
                 status = self.getStatus(status);
             }

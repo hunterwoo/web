@@ -115,3 +115,89 @@ body {
     min-height: 500px;
   }
 }
+.modal.fade.in .aside-dialog.aside-left {
+  transform: translate(0px, 0px);
+}
+.modal.fade .aside-dialog.aside-left {
+  right: 0;
+  transform: translate(-100%, 0);
+  transition: transform 0.3s ease-out 0s;
+}
+.modal.fade.in .aside-dialog.aside-right {
+  transform: translate(0px, 0px);
+}
+.modal.fade .aside-dialog.aside-right {
+  right: 0;
+  transform: translate(100%, 0);
+  transition: transform 0.3s ease-out 0s;
+}
+.aside-dialog {
+  margin: 0;
+  height: 100%;
+  width: 600px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  min-width: 320px;
+  background: #FFF;
+}
+.aside-modal-header {
+  padding: 20px;
+}
+.tag-editor {
+  display: block;
+  position: relative;
+  margin: 5px 0 10px 0;
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  min-height: 40px;
+  overflow: hidden;
+  padding: 0 9px;
+  font-size: 16px;
+  font-weight: normal;
+  background-color: #FFF;
+  color: #000;
+  cursor: text;
+  line-height: 38px;
+}
+.tag-editor .tag {
+  display: inline-block;
+  height: 24px;
+  margin: 0 7px 0 0;
+  background-color: #5BA4E5;
+  color: #FFF;
+  padding: 0 5px;
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 24px;
+  cursor: default;
+  transition: box-shadow 100ms linear;
+}
+.tag-editor .tag:hover {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+.tag-editor .tag .remove {
+  margin: 0 0 0 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tag-editor .tag-input {
+  display: inline-block;
+  width: auto;
+  height: 38px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.tag-editor .tag-input:focus {
+  box-shadow: none;
+  outline: none;
+}
+.tag-editor.active {
+  border-color: #AAA;
+}
+.tag-editor .tag-suggestions .tag {
+  cursor: pointer;
+  background-color: #BDBDBD;
+}
