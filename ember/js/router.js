@@ -11,6 +11,9 @@ ZEEV.Router.map(function () {
     this.resource('about', function () {
 
     })
+    this.resource('tag', {path: "/:tag_id"}, function () {
+
+    })
     this.route('error404', {path: '/*path'});
 });
 
@@ -39,3 +42,4 @@ ZEEV.PostsInfoRoute = Ember.Route.extend({
         return Ember.$.getJSON('/posts/' + params.posts_id);
     }
 });
+ZEEV.TagRoute = Ember.Route.extend({});

@@ -19,6 +19,7 @@ var PostSchema = new mongoose.Schema({
     meta_title      : {type: String, max: 150, required: false},
     meta_description: {type: String, max: 200, required: false},
     author          : {type: ObjectId, ref: "User"},
+    tags            : [{type: ObjectId, ref: "Tag"}],
     created_at      : {type: Date, default: Date.now()},
     updated_at      : {type: Date, default: Date.now()},
     published_at    : {type: Date, default: Date.now()},
@@ -39,7 +40,9 @@ PostSchema.statics = {
     getList         : function (cb) {
         return this
             .find({})
+            //.populate('author', 'name')
             .populate({path: 'author', select: 'name'})
+            .populate({path: 'tags', select: '_id name'})
             .sort({'updated_at': -1})
             .exec(cb)
     },
@@ -47,6 +50,7 @@ PostSchema.statics = {
         return this
             .findOne({_id: id})
             .populate({path: 'author', select: 'name'})
+            .populate({path: 'tags', select: '_id name'})
             .exec(cb)
     },
     findByIdForViews: function (id, cb) {

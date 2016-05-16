@@ -99,6 +99,15 @@
                         }
                     }
                 }))
+                .state('posts.tags', lazyLoadState({
+                    url  : '/tags',
+                    views: {
+                        '': {
+                            controller : 'postsTagsCtrl',
+                            templateUrl: 'views/posts/tags.html'
+                        }
+                    }
+                }))
                 .state('analyties', lazyLoadState({
                     url        : '/anylytics',
                     controller : 'analytiesCtrl as alCtrl',

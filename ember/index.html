@@ -99,9 +99,10 @@
             </a>
         </div>
     </aside>
-    <div class="right_col container-fluid"  style="z-index:100">
+    <div class="right_col container-fluid" style="z-index:100">
         <header class="nav_header">
-            <div class="nav_btn" {{action 'open_side' on="click"}}><i></i>
+            <div class="nav_btn" {{action
+            'open_side' on="click"}}><i></i>
     </div>
     <h1>{{#link-to "index" title="主页" class="btn-lick"}}ZEEV的小站{{/link-to}}</h1>
     {{#link-to "about" title="关于" class="profile_sm"}}<img alt="zeev" src="/common/img/logo.jpg">{{/link-to}}
@@ -156,9 +157,9 @@
     <div class="container-fluid">
         {{#each art in controller}}
         <article class="row" style="border-bottom:1px solid #ddd">
-            <header class="col-xs-12" {{bind-attr class=":col-xs-12 art.image:col-md-8"}}>
+            <header class="col-xs-12" {{bind-attr class=":col-xs-12 art.image:col-md-8" }}>
                 <h2 class="title">{{#link-to "posts.info" art._id}}{{art.title}}{{/link-to}}</h2>
-                {{posts-dynamic posts=art}}
+                {{posts-dynamic post=art}}
                 <p class="posts_html">{{{art.html}}}{{#link-to "posts.info" art._id title=art.title}}»{{/link-to}}</p>
             </header>
             {{#if art.image}}
@@ -176,7 +177,7 @@
         <article class="posts_info">
             <header>
                 <h2 class="title">{{model.title}}</h2>
-                {{posts-dynamic posts=model}}
+                {{posts-dynamic post=model}}
             </header>
             <hr>
             {{#if model.coverImg}}
@@ -199,23 +200,28 @@
     </footer>
 </script>
 
+<!--{{#link-to "tag" tag._id}}{{tag.name}}{{/link-to}}-->
 <script type="text/x-handlebars" id="components/posts-dynamic">
-    <li>zeev 发布于 {{date posts.created_at}}</li>
-    <li>栏目：<a>未分类</a></li>
+    <li>zeev 发布于 {{date post.created_at}}</li>
+    <li>栏目：
+        {{#if post.tags}}
+            {{#each tag in post.tags}}
+                <a>{{tag.name}}</a>
+            {{/each}}
+        {{else}}
+        <a>未分类</a>
+        {{/if}}
+    </li>
     <li class="hidden-xs">共 <strong>0</strong> 人围观</li>
     <li class="hidden-xs"><strong>0</strong> 个不明物体</li>
 </script>
 
 <script type="text/x-handlebars" data-template-name="about">
-
     <div class="content" style="margin-left:0;margin-right:0;">
-
         <header class="about_header">
             <h1>Ze'ev Kell</h1>
-
             <p><i class="fa fa-child"></i> The Front End Developer</p>
         </header>
-
         <div class="diamond_wrap">
             <!--<div class="bg_matrix right"></div>-->
             <div class="diamond_10 top">
@@ -261,6 +267,25 @@
     </div>
 </script>
 <!-- endbuild -->
+
+<script type="text/x-handlebars" data-template-name="tag/index">
+    <div class="container-fluid">
+        {{#each art in controller}}
+        <article class="row" style="border-bottom:1px solid #ddd">
+            <header class="col-xs-12" {{bind-attr class=":col-xs-12 art.image:col-md-8" }}>
+                <h2 class="title">{{#link-to "posts.info" art._id}}{{art.title}}{{/link-to}}</h2>
+                {{posts-dynamic post=art}}
+                <p class="posts_html">{{{art.html}}}{{#link-to "posts.info" art._id title=art.title}}»{{/link-to}}</p>
+            </header>
+            {{#if art.image}}
+            <div class="col-md-4 col-xs-12 content">
+                <img class="img-responsive" {{bind-attr src=art.image }}>
+            </div>
+            {{/if}}
+        </article>
+        {{/each}}
+    </div>
+</script>
 
 </body>
 

@@ -15,6 +15,7 @@
         .controller('postsListCtrl', postsListCtrl)
         .controller('postsNewCtrl', postsNewCtrl)
         .controller('postsEditorCtrl', postsEditorCtrl)
+        .controller('postsTagsCtrl', postsTagsCtrl)
         .controller('postsInfoCtrl', postsInfoCtrl)
 
     homeCtrl.$inject = ["$scope", "$http", "$filter", '$timeout'];
@@ -320,7 +321,7 @@
             url   : "/posts/" + $scope.$stateParams.id
         }).success(function (data) {
             $scope.post = data;
-            $scope.post.tags = [];
+            $scope.post.tags = $scope.post.tags || [];
         })
         $scope.open = function () {
             $uibModal.open({
@@ -354,6 +355,24 @@
         }
     }
 
+    postsTagsCtrl.$inject = ["$scope", "$http"];
+    function postsTagsCtrl($scope, $http) {
+        $http({
+            method: "GET",
+            url   : "/tag"
+        }).success(function (data) {
+            $scope.tags = data;
+        })
+        $scope.remove = function (index) {
+            $http({
+                method: "DELETE",
+                url   : "/tag/" + $scope.tags[index]._id
+            }).success(function (data) {
+                $scope.tags.splice(index, 1);
+            })
+        }
+    }
+
     postsNewCtrl.$inject = ["$scope", "$http", "SweetAlert", "$uibModal"]
     function postsNewCtrl($scope, $http, SweetAlert, $uibModal) {
         $scope.posts = {
@@ -361,7 +380,7 @@
             markdown: ""
         }
         $scope.ok = function () {
-            if($scope.posts.title){
+            if ($scope.posts.title) {
                 return $http({
                     method: "POST",
                     data  : $scope.posts,

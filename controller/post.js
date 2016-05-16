@@ -2,6 +2,7 @@
  * Created by Administrator on 2016/5/9 0009.
  */
 var Post = global.dbHelper.getModel("Post");
+var TagCtrl = require("./tag");
 var extend = require('util')._extend;
 var debug = require('debug')('Website:posts');
 
@@ -44,8 +45,8 @@ function getList(req, res, next) {
     Post.find({})
         .sort({'updated_at': -1})
         .limit(limit)
-        //.populate('author', 'name')
         .populate({path: 'author', select: 'name'})
+        .populate({path: 'tags', select: '_id name'})
         .exec(function (err, posts) {
             if (err) {
                 debug(err);
@@ -82,16 +83,15 @@ function get(req, res) {
         }
         Post
             .find({_id: {"$gt": _id}}, "_id title")
-            .sort({'updated_at': -1})
+            .sort({'updated_at': 1})
             .limit(1)
             .exec(function (err, nextPost) {
                 if (err) {
                     debug(err);
                     return res.sendStatus(500);
                 }
-                debug(nextPost[0])
-                post = extend({}, post._doc);
-                post.nextPost = nextPost[0];
+                post = post.toObject();
+                post["nextPost"] = nextPost[0];
                 return res.status(200).send(post);
             })
     })
@@ -116,24 +116,33 @@ function remove(req, res) {
 function update(req, res) {
     var _id = req.body._id;
     debug(_id);
-    Post.findOneAndUpdate({_id: _id}, {
-        $set: {
-            title           : req.body.title,
-            markdown        : req.body.markdown,
-            html            : converter.makeHtml(req.body.markdown || ""),
-            image           : req.body.image,
-            meta_title      : req.body.meta_title,
-            meta_description: req.body.meta_description
-        }
-    }, function (err, doc) {
+    TagCtrl.create(req.body.tags, function (err, tags) {
         if (err) {
-            debug(err);
             return res.sendStatus(500);
         }
-        if (doc) {
-            return res.status(200).send(doc);
-        } else {
-            return res.status(400).send({msg: 'post不存在'})
-        }
-    })
+        debug(tags)
+        Post.findOneAndUpdate({_id: _id}, {
+            $set: {
+                title           : req.body.title,
+                markdown        : req.body.markdown,
+                html            : converter.makeHtml(req.body.markdown || ""),
+                image           : req.body.image,
+                tags            : tags,
+                updated_at      : new Date(),
+                meta_title      : req.body.meta_title,
+                meta_description: req.body.meta_description
+            }
+        }, function (err, post) {
+            if (err) {
+                debug(err);
+                return res.sendStatus(500);
+            }
+            if (post) {
+                return res.status(200).send(post);
+            } else {
+                return res.status(400).send({msg: 'post不存在'})
+            }
+        })
+    });
+
 }

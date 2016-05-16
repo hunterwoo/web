@@ -26,16 +26,13 @@ var ArticlesSchema = new mongoose.Schema({
 })
 
 ArticlesSchema.pre('save', function (next) {
-    debug(this.isNew);
-    if (this.isNew) {
-        this.meta.updated_at = Date.now();
-    }
+    debug("save");
     next();
 })
 
 ArticlesSchema.pre('update', function (next) {
     debug("update");
-    this.meta.updated_at = Date.now();
+    this.updated_at = Date.now();
     next();
 });
 
@@ -44,7 +41,7 @@ ArticlesSchema.statics = {
         return this
             .find({})
             .populate('author', 'name')
-            .sort('meta.updated_at')
+            .sort('updated_at')
             .exec(cb)
     },
     findById        : function (id, cb) {

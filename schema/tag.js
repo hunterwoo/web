@@ -12,7 +12,6 @@ var TagSchema = new mongoose.Schema({
     description     : {type: String, max: 200, required: false},
     image           : {type: String},
     hidden          : {type: Boolean, required: false, default: false},
-    posts           : [{type: ObjectId, ref: "Post"}],
     meta_title      : {type: String, max: 150, required: false},
     meta_description: {type: String, max: 200, required: false},
     created_at      : {type: Date, default: Date.now()},
