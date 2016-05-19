@@ -33,7 +33,13 @@ ZEEV.ApplicationRoute = Ember.Route.extend({
 
 ZEEV.PostsRoute = Ember.Route.extend({
     model: function () {
-        return Ember.$.getJSON('/posts?part');
+        return new Ember.RSVP.Promise(function (resolve) {
+            Ember.$.getJSON('/posts?part').then(function (data) {
+                Ember.run.later(function () {
+                    resolve(data);
+                }, 100);
+            })
+        });
     }
 });
 
